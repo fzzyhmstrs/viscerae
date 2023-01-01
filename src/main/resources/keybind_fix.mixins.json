@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "me.fzzyhmstrs.viscerae.mixins",
+  "compatibilityLevel": "JAVA_16",
+  "client": [
+  ],
+  "mixin": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "viscerae",
+  "version": "${version}",
+  "name": "Viscerae",
+  "description": "Become a blood mage, wielding the raw power of life, extracting the essence of living creatures, and transmuting their essence to suit your purposes.",
+  "authors": [
+    "fzzyhmstrs"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/viscerae",
+    "issues": "https://github.com/fzzyhmstrs/viscerae/issues",
+    "sources": "https://github.com/fzzyhmstrs/viscerae"
+  },
+  "license": "MIT License",
+  "icon": "assets/viscerae/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "me.fzzyhmstrs.viscerae.Viscerae"
+      }
+    ]
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "me.fzzyhmstrs.viscerae.VisceraeClient"
+      }
+    ]
+  },
+  "mixins": [
+    "viscerae.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric": "*",
+    "fabric-language-kotlin": ">=1.7.0+kotlin.1.6.0",
+    "minecraft": ">=1.19",
+    "java": ">=17"
+  }
+}
