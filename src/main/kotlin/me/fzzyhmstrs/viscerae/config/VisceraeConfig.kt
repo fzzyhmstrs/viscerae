@@ -19,6 +19,7 @@ object VisceraeConfig: SyncedConfigHelper.SyncedConfig {
         var bloodWitchDurability: Int = 50
         var tier1ScepterDurability: Int = 200
         var baseRegenRateTicks: Long = BloodWitchToolMaterial.baseCooldown()
+        var vampiricSwordHealFract: Float = 0.1f
     }
 
     override fun initConfig() {

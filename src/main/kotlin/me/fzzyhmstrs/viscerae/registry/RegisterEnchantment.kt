@@ -3,6 +3,7 @@ package me.fzzyhmstrs.viscerae.registry
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
 import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
 import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.viscerae.scepter.LeechLifeAugment
 import me.fzzyhmstrs.viscerae.scepter.VampiricBoltAugment
 import me.fzzyhmstrs.viscerae.scepter.VampiricSlashAugment
 import net.minecraft.enchantment.Enchantment
@@ -14,8 +15,10 @@ object RegisterEnchantment {
 
     private val regEnchant: MutableMap<String, Enchantment> = mutableMapOf()
 
-    val VAMPIRIC_BOLT = VampiricBoltAugment(1,3, EquipmentSlot.MAINHAND).also{regEnchant["vampiric_bolt"] = it}
-    val VAMPIRIC_SLASH = VampiricSlashAugment(1,2, EquipmentSlot.MAINHAND).also{regEnchant["vampiric_slash"] = it}
+    val LEECH_LIFE = LeechLifeAugment(1,11, EquipmentSlot.MAINHAND).also{regEnchant["leech_life"] = it}
+    val MARROW_SHARDS = LeechLifeAugment(2,16, EquipmentSlot.MAINHAND).also{regEnchant["marrow_shards"] = it}
+    val VAMPIRIC_BOLT = VampiricBoltAugment(1,25, EquipmentSlot.MAINHAND).also{regEnchant["vampiric_bolt"] = it}
+    val VAMPIRIC_SLASH = VampiricSlashAugment(2,15, EquipmentSlot.MAINHAND).also{regEnchant["vampiric_slash"] = it}
 
 
     fun registerAll(){

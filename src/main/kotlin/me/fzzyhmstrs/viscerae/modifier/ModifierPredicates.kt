@@ -1,7 +1,6 @@
 package me.fzzyhmstrs.ai_odyssey.modifier
 
-import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.*
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SoulAugment
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import java.util.function.Predicate

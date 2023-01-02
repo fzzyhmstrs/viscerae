@@ -2,7 +2,6 @@ package me.fzzyhmstrs.viscerae.tool
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.viscerae.config.VisceraeConfig
-import me.fzzyhmstrs.viscerae.registry.RegisterItem
 import net.minecraft.item.Item
 import net.minecraft.recipe.Ingredient
 import kotlin.math.max

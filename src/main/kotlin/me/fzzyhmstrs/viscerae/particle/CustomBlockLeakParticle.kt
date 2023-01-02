@@ -1,8 +1,6 @@
 package me.fzzyhmstrs.ai_odyssey.particle
 
-import me.fzzyhmstrs.amethyst_core.coding_util.PlayerParticles
 import me.fzzyhmstrs.amethyst_core.coding_util.PlayerParticlesV2
-import me.fzzyhmstrs.amethyst_imbuement.item.ScepterItem
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient

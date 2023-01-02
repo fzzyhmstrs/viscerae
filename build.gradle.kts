@@ -12,6 +12,14 @@ version = modVersion
 val mavenGroup: String by project
 group = mavenGroup
 repositories {
+    maven {
+        name = "TerraformersMC"
+        url = uri("https://maven.terraformersmc.com/")
+    }
+    maven {
+        name = "Ladysnake Libs"
+        url = uri("https://ladysnake.jfrog.io/artifactory/mods")
+    }
     flatDir {
         dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
@@ -27,10 +35,17 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
     val fabricKotlinVersion: String by project
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
+
     val acVersion: String by project
     modImplementation(":amethyst_core-$acVersion"){
         exclude("net.fabricmc.fabric-api")
     }
+
+    val trinketsVersion: String by project
+    modImplementation("dev.emi:trinkets:$trinketsVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
+    include("dev.emi:trinkets:$trinketsVersion")
 
 }
 tasks {
