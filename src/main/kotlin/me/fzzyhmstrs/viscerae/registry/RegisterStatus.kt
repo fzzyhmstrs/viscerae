@@ -23,7 +23,9 @@ object RegisterStatus {
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,"bc1672b2-8ae3-11ed-a1eb-0242ac120002",0.5,EntityAttributeModifier.Operation.ADDITION)
 
     fun registerAll(){
-        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"custom_absorption"), IRON_SKIN)
-        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"draconic_vision"), NETHERITE_SKIN)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"blood_boil"), BLOOD_BOIL)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"bloodlust"), BLOODLUST)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"iron_skin"), IRON_SKIN)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"netherite_skin"), NETHERITE_SKIN)
     }
 }
