@@ -1,0 +1,26 @@
+package me.fzzyhmstrs.viscerae.registry
+
+import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.viscerae.effects.IronSkinStatusEffect
+import net.minecraft.entity.attribute.EntityAttributeModifier
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.effect.StatusEffectCategory
+import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
+
+object RegisterStatus {
+
+    val BLOODLUST = IronSkinStatusEffect(StatusEffectCategory.BENEFICIAL,0x808080)
+        .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"2gt5f6f5-8ae3-11ed-a1eb-0242ac120002",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,"12312ab3-8ae3-11ed-a1eb-0242ac120002",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+    val IRON_SKIN = IronSkinStatusEffect(StatusEffectCategory.BENEFICIAL,0x808080)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"2b3af1f0-8ae3-11ed-a1eb-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
+    val NETHERITE_SKIN = IronSkinStatusEffect(StatusEffectCategory.BENEFICIAL,0x4D494D)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"2b3af1f0-8ae3-11ed-a1eb-0242ac120002",2.0,EntityAttributeModifier.Operation.ADDITION)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS,"bc1672b2-8ae3-11ed-a1eb-0242ac120002",0.5,EntityAttributeModifier.Operation.ADDITION)
+
+    fun registerAll(){
+        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"custom_absorption"), IRON_SKIN)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"draconic_vision"), NETHERITE_SKIN)
+    }
+}

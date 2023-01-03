@@ -8,21 +8,21 @@ import net.minecraft.recipe.Ingredient
 
 
 
-object VampiricToolMaterial: ToolMaterial{
+object BloodstoneToolMaterial: ToolMaterial{
     override fun getDurability(): Int {
-        return 350
+        return 200
     }
     override fun getMiningSpeedMultiplier(): Float {
-        return 10f
+        return 7f
     }
     override fun getAttackDamage(): Float {
-        return 3.5f
+        return 2.0f
     }
     override fun getMiningLevel(): Int {
-        return MiningLevels.DIAMOND
+        return MiningLevels.IRON
     }
     override fun getEnchantability(): Int {
-        return 15
+        return 5
     }
 
     override fun getRepairIngredient(): Ingredient? {

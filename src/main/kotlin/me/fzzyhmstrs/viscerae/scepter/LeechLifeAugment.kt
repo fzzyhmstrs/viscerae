@@ -28,9 +28,9 @@ class LeechLifeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
 
     override val baseEffect: AugmentEffect
         get() = super.baseEffect
-            .withDamage(4.5F,0.5F)
-            .withRange(4.5,0.5)
-            .withAmplifier(2)
+            .withDamage(4.7F,0.3F)
+            .withRange(4.9,0.1)
+            .withAmplifier(0,1,0)
 
     override fun supportEffect(
         world: World,
@@ -41,14 +41,12 @@ class LeechLifeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
     ): Boolean {
         return if(target != null) {
             if (target is LivingEntity) {
-                val bl = if(target.isUndead) {
-                    target.damage(DamageSource.magic(user,user),effects.damage(level) * effects.amplifier(level))
-                } else {
-                    target.damage(DamageSource.magic(user,user),effects.damage(level))
-                }
+                val dmg = effects.damage(level)
+                val bl = target.damage(DamageSource.magic(user,user),dmg)
                 if (bl) {
                     effects.accept(target,AugmentConsumer.Type.HARMFUL)
                     effects.accept(user, AugmentConsumer.Type.BENEFICIAL)
+                    user.heal(dmg * (0.2f + (0.05F * effects.amplifier(level))))
                     if (user is ServerPlayerEntity){
                         sendParticles(target.pos, user)
                     }
@@ -77,7 +75,7 @@ class LeechLifeAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): Mino
     }
 
     override fun augmentStat(imbueLevel: Int): AugmentDatapoint {
-        return AugmentDatapoint(SpellType.FURY,20,8,10, imbueLevel, LoreTier.LOW_TIER, RegisterItem.BLOODSTONE)
+        return AugmentDatapoint(SpellType.FURY,20,8,5, imbueLevel, LoreTier.LOW_TIER, RegisterItem.BLOODSTONE)
     }
 
     companion object{

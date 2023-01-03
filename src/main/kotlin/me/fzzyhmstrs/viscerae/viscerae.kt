@@ -16,6 +16,7 @@ object Viscerae: ModInitializer {
         RegisterEntity.registerAll()
         RegisterEnchantment.registerAll()
         RegisterParticle.registerParticleTypes()
+        RegisterStatus.registerAll()
         RegisterNetworking.registerServer()
     }
 }
