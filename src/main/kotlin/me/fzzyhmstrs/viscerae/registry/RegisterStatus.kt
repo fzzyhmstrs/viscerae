@@ -1,6 +1,8 @@
 package me.fzzyhmstrs.viscerae.registry
 
 import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.viscerae.effects.BloodBoilStatusEffect
+import me.fzzyhmstrs.viscerae.effects.BloodlustStatusEffect
 import me.fzzyhmstrs.viscerae.effects.IronSkinStatusEffect
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
@@ -10,7 +12,8 @@ import net.minecraft.util.registry.Registry
 
 object RegisterStatus {
 
-    val BLOODLUST = IronSkinStatusEffect(StatusEffectCategory.BENEFICIAL,0x808080)
+    val BLOOD_BOIL = BloodBoilStatusEffect(StatusEffectCategory.HARMFUL,0x9E4035)
+    val BLOODLUST = BloodlustStatusEffect(StatusEffectCategory.BENEFICIAL,0x910814)
         .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"2gt5f6f5-8ae3-11ed-a1eb-0242ac120002",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,"12312ab3-8ae3-11ed-a1eb-0242ac120002",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
     val IRON_SKIN = IronSkinStatusEffect(StatusEffectCategory.BENEFICIAL,0x808080)
