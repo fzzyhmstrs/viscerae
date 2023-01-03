@@ -11,7 +11,7 @@ object RegisterModifier {
 
     private val regMod: MutableList<AugmentModifier> = mutableListOf()
 
-    val BLOODY = AugmentModifier(Identifier(Viscerae.MOD_ID,"blood_pact"), cooldownModifier = -5.0).withConsumer(
+    val BLOODY = AugmentModifier(Identifier(Viscerae.MOD_ID,"bloody"), cooldownModifier = -5.0).withConsumer(
         ModifierConsumers.BLOODY_CONSUMER) .also { regMod.add(it) }
     val BLOOD_PACT = AugmentModifier(Identifier(Viscerae.MOD_ID,"blood_pact"), manaCostModifier = -100.0).withConsumer(
         ModifierConsumers.BLOOD_PACT_CONSUMER) .also { regMod.add(it) }
