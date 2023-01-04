@@ -10,7 +10,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Item
 import net.minecraft.world.World
 
-class SpiteOfTheBloodWitchScepterItem(material: ScepterToolMaterial, settings: Item.Settings): CustomScepterItem(material, settings) {
+class BloodWitchScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {
 
     @Environment(EnvType.CLIENT)
     override fun emitParticles(world: World, client: MinecraftClient, user: LivingEntity) {

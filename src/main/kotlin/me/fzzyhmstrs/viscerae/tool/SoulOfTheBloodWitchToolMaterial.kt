@@ -2,14 +2,14 @@ package me.fzzyhmstrs.viscerae.tool
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.viscerae.config.VisceraeConfig
-import net.minecraft.item.Item
+import me.fzzyhmstrs.viscerae.registry.RegisterItem
 import net.minecraft.recipe.Ingredient
 import kotlin.math.max
 
 
-class VisceraeScepterToolMaterial(private val repairItem: Item): ScepterToolMaterial() {
+object SoulOfTheBloodWitchToolMaterial: ScepterToolMaterial() {
     override fun getDurability(): Int {
-        return VisceraeConfig.items.tier1ScepterDurability
+        return VisceraeConfig.items.bloodWitchDurability
     }
     override fun getMiningSpeedMultiplier(): Float {
         return 1.0f
@@ -29,10 +29,10 @@ class VisceraeScepterToolMaterial(private val repairItem: Item): ScepterToolMate
         return 35
     }
     override fun getRepairIngredient(): Ingredient {
-        return Ingredient.ofItems(repairItem)
+        return Ingredient.ofItems(RegisterItem.BLOODSTONE)
     }
     override fun healCooldown(): Long {
-        return max(VisceraeConfig.items.baseRegenRateTicks,minCooldown())
+        return max(VisceraeConfig.items.baseRegenRateTicks - 90L,minCooldown())
     }
     override fun scepterTier(): Int{
         return 3

@@ -11,7 +11,7 @@ class InsatiableHungerItem(material: ToolMaterial, attackDamage: Int, attackSpee
     override fun postHit(stack: ItemStack, target: LivingEntity, attacker: LivingEntity): Boolean {
         val recentDamage = target.damageTracker.mostRecentDamage
         val recentAmount = recentDamage?.damage?:0f
-        val healAmount = recentAmount * VisceraeConfig.items.vampiricSwordHealFract
+        val healAmount = recentAmount * VisceraeConfig.items.vampiricSwordHealFraction
         attacker.heal(healAmount)
 
         return super.postHit(stack, target, attacker)

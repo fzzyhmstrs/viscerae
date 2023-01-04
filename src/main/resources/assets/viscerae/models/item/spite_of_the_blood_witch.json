@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "viscerae:item/spite_of_the_blood_witch"
+  }
+}
