@@ -1,0 +1,62 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "viscerae:item/insatiable_hunger"
+  },
+  "overrides": [
+        {
+            "predicate": {
+                "type": 0.1
+            },
+            "model": "viscerae:item/insatiable_hunger_blood_slash"
+        },
+        {
+            "predicate": {
+                "type": 0.2
+            },
+            "model": "viscerae:item/insatiable_hunger_bloodthirsty"
+        },
+        {
+            "predicate": {
+                "type": 0.3
+            },
+            "model": "viscerae:item/insatiable_hunger_deadblow"
+        },
+        {
+            "predicate": {
+                "type": 0.4
+            },
+            "model": "viscerae:item/insatiable_hunger_frenzied"
+        },
+        {
+            "predicate": {
+                "type": 0.5
+            },
+            "model": "viscerae:item/insatiable_hunger_gluttonous"
+        },
+        {
+            "predicate": {
+                "type": 0.6
+            },
+            "model": "viscerae:item/insatiable_hunger_inner_fire"
+        },
+        {
+            "predicate": {
+                "type": 0.7
+            },
+            "model": "viscerae:item/insatiable_hunger_soul_bomb"
+        },
+        {
+            "predicate": {
+                "type": 0.8
+            },
+            "model": "viscerae:item/insatiable_hunger_soul_chains"
+        },
+        {
+            "predicate": {
+                "type": 0.9
+            },
+            "model": "viscerae:item/insatiable_hunger_vital"
+        }
+    ]
+}
