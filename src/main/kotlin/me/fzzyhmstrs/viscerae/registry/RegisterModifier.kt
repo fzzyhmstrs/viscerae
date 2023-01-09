@@ -13,7 +13,7 @@ object RegisterModifier {
     private val regMod: MutableList<AugmentModifier> = mutableListOf()
 
     //weapon modifiers
-    val BLOOD_SLASH = WeaponModifier(Identifier(Viscerae.MOD_ID,"blood_slash"))
+    val BLOOD_SLASH = WeaponModifier(Identifier(Viscerae.MOD_ID,"blood_slash")).withOnUse(ModifierConsumers.BLOOD_SLASH_USE_CONSUMER)
     val BLOODTHIRSTY = WeaponModifier(Identifier(Viscerae.MOD_ID,"bloodthirsty"))
     val DEADBLOW = WeaponModifier(Identifier(Viscerae.MOD_ID,"deadblow"))
     val FRENZIED = WeaponModifier(Identifier(Viscerae.MOD_ID,"frenzied"))
