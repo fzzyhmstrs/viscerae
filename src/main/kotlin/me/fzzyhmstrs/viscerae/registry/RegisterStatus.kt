@@ -16,6 +16,8 @@ object RegisterStatus {
     val BLOODLUST = BloodlustStatusEffect(StatusEffectCategory.BENEFICIAL,0x910814)
         .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"2gt5f6f5-8ae3-11ed-a1eb-0242ac120002",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,"12312ab3-8ae3-11ed-a1eb-0242ac120002",0.05,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+    val BLOODTHIRST = BloodlustStatusEffect(StatusEffectCategory.BENEFICIAL,0x910814)
+        .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,"abgr1298-8ae3-11ed-a1eb-0242ac120002",0.075,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
     val IRON_SKIN = IronSkinStatusEffect(StatusEffectCategory.BENEFICIAL,0x808080)
         .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,"2b3af1f0-8ae3-11ed-a1eb-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
     val NETHERITE_SKIN = IronSkinStatusEffect(StatusEffectCategory.BENEFICIAL,0x4D494D)
@@ -25,6 +27,7 @@ object RegisterStatus {
     fun registerAll(){
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"blood_boil"), BLOOD_BOIL)
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"bloodlust"), BLOODLUST)
+                Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"bloodthirst"), BLOODTHIRST)
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"iron_skin"), IRON_SKIN)
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"netherite_skin"), NETHERITE_SKIN)
     }
