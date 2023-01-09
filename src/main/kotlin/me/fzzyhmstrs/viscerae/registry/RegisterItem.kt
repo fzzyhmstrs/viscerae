@@ -45,7 +45,7 @@ object RegisterItem {
         
     val GRASPING_SCEPTER = CustomScepterItem(VisceraeT1ScepterToolMaterial(VISCERA),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
         .withAugments(listOf(RegisterEnchantment.VAMPIRIC_BOLT))
-        .withModifiers(listOf(RegisterModifier.BLOODY))
+        .withModifiers(listOf(ModifierRegistry.LESSER_REACH))
         .also{ regItem["grasping_scepter"] = it}
 
     val ENSOULED_SCEPTER = CustomScepterItem(VisceraeT2ScepterToolMaterial(VAMPIRIC_BLADE),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
@@ -54,28 +54,28 @@ object RegisterItem {
 
     val VISCERAL_SCEPTER = CustomScepterItem(VisceraeT2ScepterToolMaterial(VISCERA),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.MARROW_SHARDS))
-        .withModifiers(listOf(RegisterModifier.EMPOWERED, ModifierRegistry.LESSER_ATTUNED))
+        .withModifiers(listOf(RegisterModifier.VISCERAL, ModifierRegistry.LESSER_REACH))
         .also{ regItem["visceral_scepter"] = it}
 
     val VAMPIRIC_SCEPTER = CustomScepterItem(VisceraeT2ScepterToolMaterial(VAMPIRIC_BLADE),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.LEECH_LIFE))
-        .withModifiers(listOf(RegisterModifier.BLOODY))
+        .withModifiers(listOf(RegisterModifier.BLOODY, ModifierRegistry.LESSER_ATTUNED))
         .also{ regItem["vampiric_scepter"] = it}
         
     val SCEPTER_OF_THE_PACT = CustomScepterItem(VisceraeT2ScepterToolMaterial(VAMPIRIC_BLADE),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withModifiers(listOf(RegisterModifier.BLOOD_PACT, RegisterModifier.BLOOD_MAGIC))
         .also{ regItem["scepter_of_the_pact"] = it}
 
-    val SPITE_OF_THE_BLOOD_WITCH = BloodWitchScepterItem(
+    val PACT_OF_THE_BLOOD_WITCH = BloodWitchScepterItem(
         SpiteOfTheBloodWitchToolMaterial,
         FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
         .withModifiers(listOf(RegisterModifier.BLOOD_PACT,RegisterModifier.BLOOD_MAGIC, ModifierRegistry.LESSER_ATTUNED))
-        .also{ regItem["spite_of_the_blood_witch"] = it}
+        .also{ regItem["pact_of_the_blood_witch"] = it}
 
     val SOUL_OF_THE_BLOOD_WITCH = BloodWitchScepterItem(
         SoulOfTheBloodWitchToolMaterial,
         FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))
-        .withModifiers(listOf(RegisterModifier.SPIRITED, ModifierRegistry.LESSER_ATTUNED))
+        .withModifiers(listOf(RegisterModifier.SPIRITED, ModifierRegistry.LESSER_REACH))
         .also{ regItem["soul_of_the_blood_witch"] = it}
 
     fun registerAll(){

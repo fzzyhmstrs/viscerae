@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.viscerae.modifier
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
+import me.fzzyhmstrs.amethyst_core.modifier_util.WeaponModifier
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.viscerae.Viscerae
 import me.fzzyhmstrs.viscerae.registry.RegisterStatus
@@ -8,8 +9,17 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.item.ItemStack
 
 object ModifierConsumers {
+
+    //weapon modifier consumers
+    val BLOOD_SLASH_CONSUMER: WeaponModifier.WeaponConsumer =
+        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+            val rot = user.getRotationVec(1.0f)
+    }
+
+    //scepter modifier consumers
 
     val BLOOD_PACT_CONSUMER = AugmentConsumer({ list: List<LivingEntity> -> bloodPactConsumer(list) }, AugmentConsumer.Type.BENEFICIAL)
     private fun bloodPactConsumer(list: List<LivingEntity>){
