@@ -24,19 +24,46 @@ object RegisterItem {
     val BLOODY_GEM = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloody_gem"] = it}
     val CHICKEN_BONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["chicken_bone"] = it}
     val CORRUPTED_HEART = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["corrupted_heart"] = it}
+    val ENSOULED_GEM = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["ensouled_gem"] = it}
     val VISCERA = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["viscera"] = it}
 
-    //swords and tools
+    //tools
+    val BLOODSTONE_AXE = AxeItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_axe"] = it}
+    val BLOODSTONE_HOE = HoeItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_hoe"] = it}
+    val BLOODSTONE_PICKAXE = PickaxeItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_pickaxe"] = it}
+    val BLOODSTONE_SHOVEL = ShovelItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_shovel"] = it}
     val BLOODSTONE_SWORD = SwordItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_sword"] = it}
     val VAMPIRIC_BLADE = VampiricSwordItem(VampiricToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["vampiric_blade"] = it}
     val INSATIABLE_HUNGER = SwordItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_sword"] = it}
-
+    
+    //equipment
+    val BLOODSTONE_HELMET = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_helmet"] = it}
+    val BLOODSTONE_CHESTPLATE = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_chestplate"] = it}
+    val BLOODSTONE_LEGGINGS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_leggings"] = it}
+    val BLOODSTONE_BOOTS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_boots"] = it}
+    val INSATIABLE_GAZE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["instatiable_gaze"] = it}
+    val INSATIABLE_ENVY = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_envy"] = it}
+    val INSATIABLE_STRIDE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.LEGGINGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_stride"] = it}
+    val INSATIABLE_TREAD = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_tread"] = it}
+    
     //trinkets
+    val BLOODY_BAND = BloodyBandItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["bloody_band"] = it}
+    val RING_OF_SOULS = RingOfSoulsItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["ring_of_souls"] = it}
+    val CROWN_OF_SORROWS = SorrowCrownItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["crown_of_sorrows"] = it}
+    val JAGGED_CROWN = JaggedCrownItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["jagged_crown"] = it}
     val PENDANT_OF_MEMORIES = PendantOfMemoriesItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["pendant_of_memories"] = it}
+    val LOCKET_OF_YOUTH = NecklaceOfYouthItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["locket_of_youth"] = it}
     
     //altar offerings
+    val DEPRAVED_POPPET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["depraved_poppet"] = it}
+    val GILDED_FOOT = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["gilded_foot"] = it}
+    val GRISLY_POPPET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["grisly_poppet"] = it}
+    val RUNE_OF_ENERGY = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_energy"] = it}
+    val RUNE_OF_POWER = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_power"] = it}
     val RUNE_OF_UNDEATH = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC)).also{ regItem["rune_of_undeath"] = it}
+    val RUNE_OF_VITALITY = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_vitality"] = it}
     val TALISMAN_OF_BONES = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["talisman_of_bones"] = it}
+    val SOUL_CANDLE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["soul_candle"] = it}
 
     val BLOODY_SCEPTER = CustomScepterItem(VisceraeT1ScepterToolMaterial(VISCERA),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
         .withAugments(listOf(RegisterEnchantment.VAMPIRIC_BOLT))
