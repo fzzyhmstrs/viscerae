@@ -13,6 +13,7 @@ object Viscerae: ModInitializer {
     override fun onInitialize() {
         RegisterModifier.registerAll()
         RegisterItem.registerAll()
+        RegisterBlock.registerAll()
         RegisterEntity.registerAll()
         RegisterEnchantment.registerAll()
         RegisterParticle.registerParticleTypes()
