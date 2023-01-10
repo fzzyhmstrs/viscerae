@@ -27,7 +27,7 @@ object RegisterStatus {
     fun registerAll(){
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"blood_boil"), BLOOD_BOIL)
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"bloodlust"), BLOODLUST)
-                Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"bloodthirst"), BLOODTHIRST)
+        Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"bloodthirst"), BLOODTHIRST)
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"iron_skin"), IRON_SKIN)
         Registry.register(Registry.STATUS_EFFECT, Identifier(Viscerae.MOD_ID,"netherite_skin"), NETHERITE_SKIN)
     }
