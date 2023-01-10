@@ -2,13 +2,17 @@ package me.fzzyhmstrs.viscerae.modifier
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.WeaponModifier
+import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
+import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
 import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.viscerae.config.VisceraeConfig
 import me.fzzyhmstrs.viscerae.registry.RegisterStatus
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 
 object ModifierConsumers {
@@ -21,7 +25,7 @@ object ModifierConsumers {
         
     val BLOODTHIRSTY_USE_CONSUMER: WeaponModifier.WeaponConsumer =
         WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
-            user.damage(DamageSource.STARVE, 10)
+            user.damage(DamageSource.STARVE, 10f)
             EffectQueue.addStatusToQueue(user,RegisterStatus.BLOODTHIRST,160,0)
             EffectQueue.addStatusToQueue(user,StatusEffects.RESISTANCE,160,0)
             if (user is PlayerEntity){
@@ -31,7 +35,7 @@ object ModifierConsumers {
         
     val BLOODTHIRSTY_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
         WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
-            if (user.hasStatusEffect(RegisterStatus.BLOODTHIRST){
+            if (user.hasStatusEffect(RegisterStatus.BLOODTHIRST)){
                 if (target != null && !target.isAlive()){
                     val effect = user.getStatusEffect(RegisterStatus.BLOODTHIRST)
                     val amp = effect?.amplifier?:0
@@ -47,7 +51,7 @@ object ModifierConsumers {
     val DEADBLOW_USE_CONSUMER: WeaponModifier.WeaponConsumer =
         WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (target != null){
-                target.damage(DamageSource.MAGIC,10)
+                target.damage(DamageSource.MAGIC,10f)
                 target.takeKnockback(2.0,user.x - target.x,user.z - target.z)
                 EffectQueue.addStatusToQueue(user,StatusEffects.SLOWNESS,100,3)
                 if (user is PlayerEntity){
@@ -74,7 +78,7 @@ object ModifierConsumers {
             if (EventRegistry.ticker_40.isReady()){
                 if (stack.isDamaged && user is PlayerEntity){
                     val nbt = stack.nbt
-                    if (stack.damage > 100 || (nbt != null && nbt.containsKey("feeding") && nbt.getBoolean("feeding") == true)){
+                    if (stack.damage > 100 || (nbt != null && nbt.contains("feeding") && nbt.getBoolean("feeding"))){
                         
                     }
                 }
@@ -83,9 +87,7 @@ object ModifierConsumers {
         
     val INNER_FIRE_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
         WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
-            if (target != null){
-                target.addStatusEffect(StatusEffectInstance(RegisterStatus.BLOOD_BOIL,100,1))
-            }
+            target?.addStatusEffect(StatusEffectInstance(RegisterStatus.BLOOD_BOIL,100,1))
     }
         
     val SOUL_BOMB_HIT_CONSUMER: WeaponModifier.WeaponConsumer =

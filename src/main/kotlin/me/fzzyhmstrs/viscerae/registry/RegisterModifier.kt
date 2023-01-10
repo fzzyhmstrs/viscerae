@@ -6,6 +6,8 @@ import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.viscerae.Viscerae
 import me.fzzyhmstrs.viscerae.modifier.ModifierConsumers
 import me.fzzyhmstrs.viscerae.modifier.ModifierPredicates
+import net.minecraft.entity.attribute.EntityAttributeModifier
+import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.util.Identifier
 
 object RegisterModifier {
@@ -13,8 +15,10 @@ object RegisterModifier {
     private val regMod: MutableList<AugmentModifier> = mutableListOf()
 
     //weapon modifiers
-    val BLOOD_SLASH = WeaponModifier(Identifier(Viscerae.MOD_ID,"blood_slash")).withOnUse(ModifierConsumers.BLOOD_SLASH_USE_CONSUMER)
+    val BLOOD_SLASH = WeaponModifier(Identifier(Viscerae.MOD_ID,"blood_slash"))
+        .withOnUse(ModifierConsumers.BLOOD_SLASH_USE_CONSUMER)
     val BLOODTHIRSTY = WeaponModifier(Identifier(Viscerae.MOD_ID,"bloodthirsty"))
+        .withAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,"083dcbc6-908f-11ed-a1eb-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
     val DEADBLOW = WeaponModifier(Identifier(Viscerae.MOD_ID,"deadblow"))
     val FRENZIED = WeaponModifier(Identifier(Viscerae.MOD_ID,"frenzied"))
     val GLUTTONOUS = WeaponModifier(Identifier(Viscerae.MOD_ID,"gluttonous"))
