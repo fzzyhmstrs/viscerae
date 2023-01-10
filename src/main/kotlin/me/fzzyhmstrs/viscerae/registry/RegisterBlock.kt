@@ -14,8 +14,8 @@ object RegisterBlock {
     val BLOODSTAINED_ALTAR = BloodstainedAltarBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["bloodstained_altar"] = it }
     val CHISELED_TEMPLE_STONE = Block(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["chiseled_temple_stone"] = it }
     val NOTCHED_TEMPLE_STONE = Block(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["notched_temple_stone"] = it }
-    val OFFERING_PEDESTAL = Block(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["offering_pedestal"] = it }
-    val OFFERING_SLAB = SlabBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["offering_slab"] = it }
+    val OFFERING_PEDESTAL = OfferingBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["offering_pedestal"] = it }
+    val OFFERING_SLAB = OfferingSlabBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["offering_slab"] = it }
     val POLISHED_TEMPLE_STONE = Block(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["polished_temple_stone"] = it }
     val STONY_ALTAR = AltarBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["stony_altar"] = it }
     val TEMPLE_PILLAR = PillarBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_pillar"] = it }
