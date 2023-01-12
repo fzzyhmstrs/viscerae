@@ -8,7 +8,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
 @Suppress("PrivatePropertyName")
-class InsatiableArmorMaterial : ArmorMaterial {
+object InsatiableArmorMaterial : ArmorMaterial {
     private val BASE_DURABILITY = intArrayOf(13, 15, 16, 11)
     private val PROTECTION_VALUES = intArrayOf(4, 8, 10, 5)
 

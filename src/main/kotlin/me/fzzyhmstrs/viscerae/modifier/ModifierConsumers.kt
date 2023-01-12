@@ -21,6 +21,7 @@ object ModifierConsumers {
     val BLOOD_SLASH_USE_CONSUMER: WeaponModifier.WeaponConsumer =
         WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             val rot = user.getRotationVec(1.0f)
+            val nbt = stack.orCreateNbt
             nbt.putInt("slash_power",0)
     }
         

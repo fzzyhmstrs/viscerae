@@ -5,6 +5,9 @@ import me.fzzyhmstrs.viscerae.block.*
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
+import net.minecraft.item.BlockItem
+import net.minecraft.sound.BlockSoundGroup
+import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 object RegisterBlock {
@@ -39,8 +42,8 @@ object RegisterBlock {
     }
 
     private fun registerBlock(path: String, block:Block?){
-        Registry.register(Registries.BLOCK, Identifier(Viscerae.MOD_ID, path), block)
-        Registry.register(Registries.ITEM, Identifier(Viscerae.MOD_ID,path), BlockItem(block,FabricItemSettings()))
+        Registry.register(Registry.BLOCK, Identifier(Viscerae.MOD_ID, path), block)
+        Registry.register(Registry.ITEM, Identifier(Viscerae.MOD_ID,path), BlockItem(block,FabricItemSettings()))
     }
     
 }

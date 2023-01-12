@@ -1,16 +1,17 @@
 package me.fzzyhmstrs.viscerae.registry
 
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
+import me.fzzyhmstrs.amethyst_imbuement.item.CustomAxeItem
+import me.fzzyhmstrs.amethyst_imbuement.item.CustomHoeItem
+import me.fzzyhmstrs.amethyst_imbuement.item.CustomPickaxeItem
 import me.fzzyhmstrs.viscerae.Viscerae
-import me.fzzyhmstrs.viscerae.item.CustomScepterItem
-import me.fzzyhmstrs.viscerae.item.PendantOfMemoriesItem
-import me.fzzyhmstrs.viscerae.item.BloodWitchScepterItem
-import me.fzzyhmstrs.viscerae.item.VampiricSwordItem
+import me.fzzyhmstrs.viscerae.armor.BloodstoneArmorMaterial
+import me.fzzyhmstrs.viscerae.armor.InsatiableArmorMaterial
+import me.fzzyhmstrs.viscerae.item.*
 import me.fzzyhmstrs.viscerae.tool.*
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.SwordItem
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.*
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
 import net.minecraft.util.registry.Registry
@@ -28,22 +29,22 @@ object RegisterItem {
     val VISCERA = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["viscera"] = it}
 
     //tools
-    val BLOODSTONE_AXE = AxeItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_axe"] = it}
-    val BLOODSTONE_HOE = HoeItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_hoe"] = it}
-    val BLOODSTONE_PICKAXE = PickaxeItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_pickaxe"] = it}
-    val BLOODSTONE_SHOVEL = ShovelItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_shovel"] = it}
+    val BLOODSTONE_AXE = CustomAxeItem(BloodstoneToolMaterial,5.0f,-3.0f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_axe"] = it}
+    val BLOODSTONE_HOE = CustomHoeItem(BloodstoneToolMaterial,0,0.0f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_hoe"] = it}
+    val BLOODSTONE_PICKAXE = CustomPickaxeItem(BloodstoneToolMaterial,1,-2.8f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_pickaxe"] = it}
+    val BLOODSTONE_SHOVEL = ShovelItem(BloodstoneToolMaterial,1.5f,-3.0f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_shovel"] = it}
     val BLOODSTONE_SWORD = SwordItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_sword"] = it}
     val VAMPIRIC_BLADE = VampiricSwordItem(VampiricToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["vampiric_blade"] = it}
     val INSATIABLE_HUNGER = SwordItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_sword"] = it}
     
     //equipment
-    val BLOODSTONE_HELMET = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_helmet"] = it}
+    val BLOODSTONE_HELMET = ArmorItem(BloodstoneArmorMaterial, EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_helmet"] = it}
     val BLOODSTONE_CHESTPLATE = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_chestplate"] = it}
     val BLOODSTONE_LEGGINGS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_leggings"] = it}
     val BLOODSTONE_BOOTS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_boots"] = it}
     val INSATIABLE_GAZE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["instatiable_gaze"] = it}
     val INSATIABLE_ENVY = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_envy"] = it}
-    val INSATIABLE_STRIDE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.LEGGINGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_stride"] = it}
+    val INSATIABLE_STRIDE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_stride"] = it}
     val INSATIABLE_TREAD = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_tread"] = it}
     
     //trinkets
