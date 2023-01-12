@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "viscerae:block/notched_dark_temple_stone"
+  }
+}

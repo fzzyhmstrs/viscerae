@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "viscerae:block/dark_temple_pillar_top",
+    "side": "viscerae:block/dark_temple_pillar"
+  }
+}

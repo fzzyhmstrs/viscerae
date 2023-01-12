@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "viscerae:block/temple_stone_brick",
+    "top": "viscerae:block/temple_stone_brick",
+    "side": "viscerae:block/temple_stone_brick"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "viscerae:block/offering_pedestal_top",
+    "north": "viscerae:block/offering_pedestal_side",
+    "south": "viscerae:block/offering_pedestal_side",
+    "east": "viscerae:block/offering_pedestal_side",
+    "west": "viscerae:block/offering_pedestal_side",
+    "up": "viscerae:block/offering_pedestal_top",
+    "down": "viscerae:block/offering_pedestal_bottom"
+  }
+}

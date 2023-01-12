@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "viscerae:block/offering_pedestal_bottom",
+    "top": "viscerae:block/offering_pedestal_top",
+    "side": "viscerae:block/offering_pedestal_side"
+  }
+}

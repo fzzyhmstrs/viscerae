@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "viscerae:block/polished_temple_stone"
+  }
+}

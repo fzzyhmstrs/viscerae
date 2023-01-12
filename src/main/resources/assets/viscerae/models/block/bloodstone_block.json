@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "viscerae:block/bloodstone_block"
+  }
+}
