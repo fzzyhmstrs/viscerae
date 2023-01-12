@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "viscerae:block/bloodwood_door_top",
+    "top": "viscerae:block/bloodwood_door_bottom"
+  }
+}
