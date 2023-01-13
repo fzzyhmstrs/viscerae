@@ -51,6 +51,7 @@
       "entries": [
 	{
 	  "type": "minecraft:item",
+	  "name": "viscerae:bloody_gem",
 	  "conditions": [
 	    {
 	      "condition": "minecraft:random_chance",
