@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "viscerae:block/bloodwood_slab"
+    },
+    "type=double": {
+      "model": "viscerae:block/bloodwood_planks"
+    },
+    "type=top": {
+      "model": "viscerae:block/bloodwood_slab_top"
+    }
+  }
+}

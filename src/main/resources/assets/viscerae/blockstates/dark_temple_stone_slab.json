@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "viscerae:block/dark_temple_stone_slab"
+    },
+    "type=double": {
+      "model": "viscerae:block/dark_temple_stone"
+    },
+    "type=top": {
+      "model": "viscerae:block/dark_temple_stone_slab_top"
+    }
+  }
+}

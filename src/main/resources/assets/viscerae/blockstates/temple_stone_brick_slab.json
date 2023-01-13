@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "viscerae:block/temple_stone_brick_slab"
+    },
+    "type=double": {
+      "model": "viscerae:block/temple_stone_bricks"
+    },
+    "type=top": {
+      "model": "viscerae:block/temple_stone_brick_slab_top"
+    }
+  }
+}
