@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+      "viscerae:bloodwood_button",
+      "viscerae:bloodwood_door",
+      "viscerae:bloodwood_planks",
+      "viscerae:bloodwood_fence",
+      "viscerae:bloodwood_fence_gate",
+      "viscerae:bloodwood_log",
+      "viscerae:bloodwood_wood",
+      "viscerae:bloodwood_pressure_plate",
+      "viscerae:bloodwood_slab",
+      "viscerae:bloodwood_stairs",
+      "viscerae:bloodwood_trapdoor",
+      "viscerae:stripped_bloodwood_log",
+      "viscerae:stripped_bloodwood_wood"
+  ]
+}
