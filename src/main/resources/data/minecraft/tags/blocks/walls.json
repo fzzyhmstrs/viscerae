@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "viscerae:temple_stone_wall",
+    "viscerae:temple_stone_brick_wall",
+    "viscerae:dark_temple_stone_wall"
+  ]
+}

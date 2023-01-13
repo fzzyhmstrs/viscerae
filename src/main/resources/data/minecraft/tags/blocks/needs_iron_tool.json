@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "viscerae:bloodstone_ore",
+    "viscerae:bloodstone_blackstone_ore",
+    "viscerae:bloodstone_deepslate_ore",
+    "viscerae:bloodstone_block",
+    "viscerae:gilded_bloodstone_block",
+  ]
+}
