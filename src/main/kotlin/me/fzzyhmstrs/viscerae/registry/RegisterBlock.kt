@@ -5,10 +5,14 @@ import me.fzzyhmstrs.viscerae.block.*
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
+import net.minecraft.entity.EntityType
 import net.minecraft.item.BlockItem
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.BlockView
 
 object RegisterBlock {
     
@@ -22,14 +26,17 @@ object RegisterBlock {
     val TRIAL_STONE = TrialBlock(FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).requiresTool().strength(5000F,3600000.0f).sounds(BlockSoundGroup.METAL)).also { regBlock["trial_stone"] = it }
     
     //bloodstone
-    val BLOODSTONE_BLACKSTONE_ORE = OreBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.STONE),UniformIntProvider(1,2)).also { regBlock["bloodstone_blackstone_ore"] = it }
-    val BLOODSTONE_DEEPSLATE_ORE = OreBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.DEEPSLATE),UniformIntProvider(1,2)).also { regBlock["bloodstone_deepslate_ore"] = it }
-    val BLOODSTONE_ORE = OreBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.STONE),UniformIntProvider(1,2)).also { regBlock["bloodstone_ore"] = it }
+    val BLOODSTONE_BLACKSTONE_ORE = OreBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.STONE),UniformIntProvider.create(1,2)).also { regBlock["bloodstone_blackstone_ore"] = it }
+    val BLOODSTONE_DEEPSLATE_ORE = OreBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.DEEPSLATE),UniformIntProvider.create(1,2)).also { regBlock["bloodstone_deepslate_ore"] = it }
+    val BLOODSTONE_ORE = OreBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.STONE), UniformIntProvider.create(1,2)).also { regBlock["bloodstone_ore"] = it }
     val BLOODSTONE_BLOCK = Block(FabricBlockSettings.of(Material.STONE, MapColor.DARK_RED).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL)).also { regBlock["bloodstone_block"] = it }
     val GILDED_BLOODSTONE_BLOCK = Block(FabricBlockSettings.of(Material.STONE, MapColor.DARK_RED).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.GILDED_BLACKSTONE)).also { regBlock["gilded_bloodstone_block"] = it }
     
     //Bloodwood
-    val BLOODWOOD_LEAVES = LeavesBlock() //todo
+    val BLOODWOOD_LEAVES = LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque()
+        .allowsSpawning { _: BlockState, _: BlockView, _: BlockPos, type: EntityType<*> -> canSpawnOnLeaves(type) }
+        .suffocates{ _: BlockState, _: BlockView, _: BlockPos -> never() }
+        .blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() })
     val BLOODWOOD_BUTTON = WoodenButtonBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().strength(0.5f).sounds(BlockSoundGroup.WOOD)).also { regBlock["bloodwood_button"] = it }
     val BLOODWOOD_DOOR = DoorBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(3.0f).sounds(BlockSoundGroup.WOOD).nonOpaque()).also { regBlock["bloodwood_door"] = it }
     val BLOODWOOD_PLANKS = Block(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(2.0f, 3.0f).sounds(BlockSoundGroup.WOOD)).also { regBlock["bloodwood_planks"] = it }
@@ -80,5 +87,8 @@ object RegisterBlock {
     private fun never(): Boolean {
         return false
     }
-    
+
+    private fun canSpawnOnLeaves(type: EntityType<*>): Boolean {
+        return type === EntityType.OCELOT || type === EntityType.PARROT
+    }
 }

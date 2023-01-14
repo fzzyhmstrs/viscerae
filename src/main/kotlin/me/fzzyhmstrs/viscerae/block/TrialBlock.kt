@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.viscerae.block
 
+import me.fzzyhmstrs.viscerae.entity.block.TrialBlockEntity
 import me.fzzyhmstrs.viscerae.registry.RegisterEntity
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
@@ -16,7 +17,7 @@ class TrialBlock(settings: Settings): BlockWithEntity(settings){
     }
     
      override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return TODO()
+        return TrialBlockEntity(pos, state)
     }
      
      override fun <T : BlockEntity> getTicker(

@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.viscerae.entity
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntity
+import me.fzzyhmstrs.amethyst_core.entity_util.ModifiableEffectEntity
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
 import me.fzzyhmstrs.viscerae.registry.RegisterEnchantment
@@ -8,7 +9,9 @@ import me.fzzyhmstrs.viscerae.registry.RegisterEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.entity.projectile.ProjectileEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.SoundCategory
@@ -20,7 +23,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import kotlin.math.min
 
-class MarrowShardEntity(entityType: EntityType<out MarrowShardEntity?>, world: World): MissileEntity(entityType, world) {
+class MarrowShardEntity(entityType: EntityType<out MarrowShardEntity?>, world: World): PersistentProjectileEntity(entityType, world), ModifiableEffectEntity {
 
     constructor(world: World, owner: LivingEntity, yaw: Float, speed: Float, divergence: Float, x: Double, y: Double, z: Double) : this(
         RegisterEntity.MARROW_SHARD_ENTITY,world){
@@ -47,6 +50,7 @@ class MarrowShardEntity(entityType: EntityType<out MarrowShardEntity?>, world: W
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
+        entityEffects.setDamage(ae.damage(level))
         entityEffects.setAmplifier(ae.amplifier(level))
         entityEffects.setRange(ae.range(level))
     }
@@ -87,8 +91,8 @@ class MarrowShardEntity(entityType: EntityType<out MarrowShardEntity?>, world: W
         discard()
     }
 
-    override fun getParticleType(): ParticleEffect {
-        return ParticleTypes.END_ROD
+    override fun asItemStack(): ItemStack {
+        return ItemStack.EMPTY
     }
 
     companion object{

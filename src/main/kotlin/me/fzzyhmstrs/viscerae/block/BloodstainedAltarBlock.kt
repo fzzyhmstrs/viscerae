@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.viscerae.block
 
+import me.fzzyhmstrs.viscerae.entity.block.BloodstainedAltarEntity
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.util.math.BlockPos
@@ -24,7 +25,7 @@ class BloodstainedAltarBlock(settings: Settings): BlockWithEntity(settings){
     }
     
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return TODO()
+        return BloodstainedAltarEntity(pos, state)
     }
     
     companion object{

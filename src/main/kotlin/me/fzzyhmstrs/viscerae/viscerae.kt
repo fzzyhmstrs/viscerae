@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.viscerae
 
+import me.fzzyhmstrs.viscerae.config.VisceraeConfig
 import me.fzzyhmstrs.viscerae.registry.*
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.ModInitializer
@@ -11,6 +12,7 @@ object Viscerae: ModInitializer {
     val vRandom = Random(System.currentTimeMillis())
 
     override fun onInitialize() {
+        VisceraeConfig.initConfig()
         RegisterModifier.registerAll()
         RegisterItem.registerAll()
         RegisterBlock.registerAll()
