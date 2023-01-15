@@ -7,7 +7,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 
-class NecklaceOfYouthItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
+class LocketOfYouthItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
 
 
 }

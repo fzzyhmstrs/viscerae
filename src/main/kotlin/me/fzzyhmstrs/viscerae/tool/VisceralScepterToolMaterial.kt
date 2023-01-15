@@ -2,12 +2,14 @@ package me.fzzyhmstrs.viscerae.tool
 
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
 import me.fzzyhmstrs.viscerae.config.VisceraeConfig
+import me.fzzyhmstrs.viscerae.registry.RegisterItem
+import me.fzzyhmstrs.viscerae.registry.RegisterStatus
 import net.minecraft.item.Item
 import net.minecraft.recipe.Ingredient
 import kotlin.math.max
 
 
-class VisceraeT2ScepterToolMaterial(private val repairItem: Item): ScepterToolMaterial() {
+object VisceralScepterToolMaterial: ScepterToolMaterial() {
     override fun getDurability(): Int {
         return VisceraeConfig.items.tier2ScepterDurability
     }
@@ -15,13 +17,11 @@ class VisceraeT2ScepterToolMaterial(private val repairItem: Item): ScepterToolMa
         return 1.0f
     }
     override fun getAttackDamage(): Float {
-        return 2.0f
+        return 4.0f
     }
-
     override fun getAttackSpeed(): Double {
         return -3.0
     }
-
     override fun getMiningLevel(): Int {
         return 1
     }
@@ -29,7 +29,7 @@ class VisceraeT2ScepterToolMaterial(private val repairItem: Item): ScepterToolMa
         return 35
     }
     override fun getRepairIngredient(): Ingredient {
-        return Ingredient.ofItems(repairItem)
+        return Ingredient.ofItems(RegisterItem.VISCERA)
     }
     override fun healCooldown(): Long {
         return max(VisceraeConfig.items.baseRegenRateTicks - 25L,minCooldown())

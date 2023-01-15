@@ -10,9 +10,15 @@ import net.minecraft.item.ItemStack
 
 open class JaggedCrownItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
 
-    override fun postHit(stack: ItemStack, target: LivingEntity, attacker: LivingEntity): Boolean {
-        attacker.damage(DamageSource.thorns(target),1.0f)
-        return super.postHit(stack, target, attacker)
+    override fun onWearerDamaged(
+        stack: ItemStack,
+        wearer: LivingEntity,
+        attacker: LivingEntity?,
+        source: DamageSource,
+        amount: Float
+    ) {
+        attacker?.damage(DamageSource.thorns(wearer),2.0f)
+        super.onWearerDamaged(stack, wearer, attacker, source, amount)
     }
 
 }

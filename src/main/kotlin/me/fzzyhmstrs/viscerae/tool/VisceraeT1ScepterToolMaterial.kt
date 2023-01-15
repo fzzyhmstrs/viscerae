@@ -35,6 +35,6 @@ class VisceraeT1ScepterToolMaterial(private val repairItem: Item): ScepterToolMa
         return max(VisceraeConfig.items.baseRegenRateTicks,minCooldown())
     }
     override fun scepterTier(): Int{
-        return 3
+        return 1
     }
 }

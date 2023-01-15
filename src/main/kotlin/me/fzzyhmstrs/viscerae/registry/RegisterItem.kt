@@ -55,7 +55,7 @@ object RegisterItem {
     val JAGGED_CROWN = JaggedCrownItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["jagged_crown"] = it}
     val BLAZING_CROWN = BlazingCrownItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["blazing_crown"] = it}
     val PENDANT_OF_MEMORIES = PendantOfMemoriesItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["pendant_of_memories"] = it}
-    val LOCKET_OF_YOUTH = NecklaceOfYouthItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["locket_of_youth"] = it}
+    val LOCKET_OF_YOUTH = LocketOfYouthItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["locket_of_youth"] = it}
     
     //altar offerings
     val DEPRAVED_POPPET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["depraved_poppet"] = it}
@@ -82,7 +82,7 @@ object RegisterItem {
         .withModifiers(listOf(RegisterModifier.SPIRITED))
         .also{ regItem["ensouled_scepter"] = it}
 
-    val VISCERAL_SCEPTER = CustomScepterItem(VisceraeT2ScepterToolMaterial(VISCERA),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
+    val VISCERAL_SCEPTER = VisceralScepterItem(VisceralScepterToolMaterial,FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.RARE))
         .withAugments(listOf(RegisterEnchantment.MARROW_SHARDS))
         .withModifiers(listOf(RegisterModifier.VISCERAL, ModifierRegistry.LESSER_REACH))
         .also{ regItem["visceral_scepter"] = it}
