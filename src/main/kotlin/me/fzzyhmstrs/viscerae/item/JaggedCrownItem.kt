@@ -8,7 +8,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 
-class JaggedCrownItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
+open class JaggedCrownItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
 
     override fun postHit(stack: ItemStack, target: LivingEntity, attacker: LivingEntity): Boolean {
         attacker.damage(DamageSource.thorns(target),1.0f)

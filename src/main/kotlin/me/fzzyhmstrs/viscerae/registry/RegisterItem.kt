@@ -26,6 +26,7 @@ object RegisterItem {
     val CHICKEN_BONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["chicken_bone"] = it}
     val CORRUPTED_HEART = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["corrupted_heart"] = it}
     val ENSOULED_GEM = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["ensouled_gem"] = it}
+    val LIFEBLOOD_OF_THE_PACT = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC)).also{ regItem["lifeblood_of_the_pact"] = it}
     val VISCERA = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["viscera"] = it}
 
     //tools
@@ -52,6 +53,7 @@ object RegisterItem {
     val RING_OF_SOULS = RingOfSoulsItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["ring_of_souls"] = it}
     val CROWN_OF_SORROWS = SorrowCrownItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["crown_of_sorrows"] = it}
     val JAGGED_CROWN = JaggedCrownItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["jagged_crown"] = it}
+    val BLAZING_CROWN = BlazingCrownItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["blazing_crown"] = it}
     val PENDANT_OF_MEMORIES = PendantOfMemoriesItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["pendant_of_memories"] = it}
     val LOCKET_OF_YOUTH = NecklaceOfYouthItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["locket_of_youth"] = it}
     
