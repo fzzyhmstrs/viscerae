@@ -74,7 +74,7 @@ object RegisterBlock {
     val TEMPLE_STONE_BRICK_STAIRS = StairsBlock(TEMPLE_STONE_BRICKS.defaultState,FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_brick_stairs"] = it }
     val TEMPLE_STONE_BRICK_WALL = WallBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_brick_wall"] = it }
     val TEMPLE_STONE_SLAB = SlabBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_slab"] = it }
-    val TEMPLE_STONE_STAIRS = StairsBlock(TEMPLE_STONE_BRICKS.defaultState,FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_stairs"] = it }
+    val TEMPLE_STONE_STAIRS = StairsBlock(TEMPLE_STONE.defaultState,FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_stairs"] = it }
     val TEMPLE_STONE_WALL = WallBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_wall"] = it }
     
     fun registerAll() {
