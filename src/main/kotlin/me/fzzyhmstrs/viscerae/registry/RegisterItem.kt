@@ -61,7 +61,6 @@ object RegisterItem {
     val DEPRAVED_POPPET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["depraved_poppet"] = it}
     val GILDED_FOOT = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["gilded_foot"] = it}
     val GRISLY_POPPET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["grisly_poppet"] = it}
-    val RUNE_OF_ENERGY = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_energy"] = it}
     val RUNE_OF_POWER = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_power"] = it}
     val RUNE_OF_UNDEATH = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC)).also{ regItem["rune_of_undeath"] = it}
     val RUNE_OF_VITALITY = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_vitality"] = it}
