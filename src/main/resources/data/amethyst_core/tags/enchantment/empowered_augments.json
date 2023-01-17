@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"viscerae:vampiric_bolt",
+    "viscerae:leech_life",
+    "viscerae:boil_blood",
+    "viscerae:marrow_shards",
+    "viscerae:gore_lances",
+    "viscerae:bloodbath"
+	]
+}
