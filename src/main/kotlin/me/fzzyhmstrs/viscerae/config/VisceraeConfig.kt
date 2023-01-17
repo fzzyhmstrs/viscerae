@@ -24,6 +24,7 @@ object VisceraeConfig: SyncedConfigHelper.SyncedConfig {
         var tier2ScepterDurability: Int = 500
         var baseRegenRateTicks: Long = SpiteOfTheBloodWitchToolMaterial.baseCooldown()
         var vampiricSwordHealFraction: Float = 0.1f
+        var blazingCrownBoilChance: Float = 0.333333f
     }
 
     override fun initConfig() {
