@@ -1,0 +1,14 @@
+{
+	"replace": false,
+	"values": [
+		"viscerae:vampiric_bolt",
+    "viscerae:leech_life",
+    "viscerae:displace_flesh",
+    "viscerae:vampiric_slash",
+    "viscerae:boil_blood",
+    "viscerae:ennervate",
+    "viscerae:dominate_mind",
+    "viscerae:bloodbath",
+    "viscerae:gore_lances",
+	]
+}
