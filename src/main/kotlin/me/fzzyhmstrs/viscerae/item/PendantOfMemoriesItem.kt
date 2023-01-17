@@ -41,10 +41,12 @@ class PendantOfMemoriesItem(settings: Settings): AbstractAugmentJewelryItem(sett
                 val i = entity.world.random.nextInt(stacks.size)
                 if (stack.damage < stack.maxDamage - 1)
                 this.healDamage(1,stacks[i])
-                if (this.manaDamage(stack,entity.world,entity,1)){
-                    val nbt = stack.orCreateNbt
-                    nbt.putBoolean("active",false)
-                }
+            } else {
+                entity.addExperience(1)
+            }
+            if (this.manaDamage(stack,entity.world,entity,1)){
+                val nbt = stack.orCreateNbt
+                nbt.putBoolean("active",false)
             }
         }
         super.intermittentTick(stack, entity)
