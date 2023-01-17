@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "viscerae:bloody_scepter",
+    "viscerae:grasping_scepter",
+    "viscerae:ensouled_scepter",
+    "viscerae:scepter_of_the_pact",
+    "viscerae:vampiric_scepter",
+    "viscerae:visceral_scepter",
+    "viscerae:pact_of_the_blood_witch",
+    "viscerae:soul_of_the_blood_witch"
+  ]
+}
