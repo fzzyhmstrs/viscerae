@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"viscerae:boil_blood",
+    "viscerae:marrow_shards",
+    "viscerae:bone_cages",
+    "viscerae:bloodbath",
+    "viscerae:gore_lances"
+	]
+}
