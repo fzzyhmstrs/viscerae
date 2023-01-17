@@ -51,7 +51,7 @@ object RegisterBlock {
     val BLOODWOOD_LEAVES_FLOWERING = LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque()
         .allowsSpawning { _: BlockState, _: BlockView, _: BlockPos, type: EntityType<*> -> canSpawnOnLeaves(type) }
         .suffocates{ _: BlockState, _: BlockView, _: BlockPos -> never() }
-        .blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["flowering_bloodwood_leaves"] = it }
+        .blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["bloodwood_leaves_flowering"] = it }
     val BLOODWOOD_SAPLING = SaplingBlock(BloodwoodSaplingGenerator(),FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)).also { regBlock["bloodwood_sapling"] = it }
     val BLOODWOOD_BUTTON = WoodenButtonBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().strength(0.5f).sounds(BlockSoundGroup.WOOD)).also { regBlock["bloodwood_button"] = it }
     val BLOODWOOD_DOOR = DoorBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(3.0f).sounds(BlockSoundGroup.WOOD).nonOpaque()).also { regBlock["bloodwood_door"] = it }
