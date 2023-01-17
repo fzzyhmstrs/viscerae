@@ -176,11 +176,11 @@ object ModifierConsumers {
                 val duration = effect?.duration?:0
                 if (duration > 0){
                     val duration2 = if(duration < 100) {100} else {duration}
-                    it.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER,duration2,amp + 1))
+                    it.addStatusEffect(StatusEffectInstance(RegisterStatus.BLOODLUST,duration2,amp + 1))
                 }
             } else {
                 it.addStatusEffect(
-                    StatusEffectInstance(StatusEffects.WITHER, 80)
+                    StatusEffectInstance(RegisterStatus.BLOODLUST, 100)
                 )
             }
         }
