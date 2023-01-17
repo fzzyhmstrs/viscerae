@@ -9,5 +9,15 @@ import net.minecraft.item.ItemStack
 
 class LocketOfYouthItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
 
+    override fun onWearerKilledOther(stack: ItemStack, wearer: LivingEntity, victim: LivingEntity, world: ServerWorld) {
+        val nbt = stack.orCreateNbt
+        if (!nbt.contains("kills")){
+            nbt.putInt("kills",1)
+        } else {
+            val kills = nbt.getInt("kills")
+            nbt.putInt("kills",kills + 1)
+        }
+        super.onWearerKilledOther(stack, wearer, victim, world)
+    }
 
 }
