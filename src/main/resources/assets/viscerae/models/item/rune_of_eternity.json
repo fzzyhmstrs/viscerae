@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "viscerae:item/rune_of_undeath"
+    "layer0": "viscerae:item/rune_of_eternity"
   }
 }
