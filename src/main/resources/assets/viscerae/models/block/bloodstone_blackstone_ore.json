@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "viscerae:block/bloodstone_blackstone_ore"
+    "end": "viscerae:block/bloodstone_blackstone_ore_top",
+    "side": "viscerae:block/bloodstone_blackstone_ore"
   }
 }

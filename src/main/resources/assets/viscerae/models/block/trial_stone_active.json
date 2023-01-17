@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "viscerae:block/trial_stone_top_active",
+    "north": "viscerae:block/trial_stone_side_active",
+    "south": "viscerae:block/trial_stone_side_active",
+    "east": "viscerae:block/trial_stone_side_active",
+    "west": "viscerae:block/trial_stone_side_active",
+    "up": "viscerae:block/trial_stone_top_active",
+    "down": "minecraft:block/polished_blackstone"
+  }
+}

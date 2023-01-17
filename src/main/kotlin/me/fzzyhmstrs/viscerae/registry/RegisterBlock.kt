@@ -5,14 +5,25 @@ import me.fzzyhmstrs.viscerae.block.*
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
+import net.minecraft.block.sapling.OakSaplingGenerator
 import net.minecraft.entity.EntityType
 import net.minecraft.item.BlockItem
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
+import net.minecraft.util.collection.DataPool
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.intprovider.ConstantIntProvider
 import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.BlockView
+import net.minecraft.world.gen.feature.ConfiguredFeatures
+import net.minecraft.world.gen.feature.Feature
+import net.minecraft.world.gen.feature.TreeFeatureConfig
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize
+import net.minecraft.world.gen.foliage.RandomSpreadFoliagePlacer
+import net.minecraft.world.gen.stateprovider.BlockStateProvider
+import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider
+import net.minecraft.world.gen.trunk.BendingTrunkPlacer
 
 object RegisterBlock {
     
@@ -36,7 +47,12 @@ object RegisterBlock {
     val BLOODWOOD_LEAVES = LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque()
         .allowsSpawning { _: BlockState, _: BlockView, _: BlockPos, type: EntityType<*> -> canSpawnOnLeaves(type) }
         .suffocates{ _: BlockState, _: BlockView, _: BlockPos -> never() }
-        .blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() })
+        .blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["bloodwood_leaves"] = it }
+    val BLOODWOOD_LEAVES_FLOWERING = LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque()
+        .allowsSpawning { _: BlockState, _: BlockView, _: BlockPos, type: EntityType<*> -> canSpawnOnLeaves(type) }
+        .suffocates{ _: BlockState, _: BlockView, _: BlockPos -> never() }
+        .blockVision { _: BlockState, _: BlockView, _: BlockPos -> never() }).also { regBlock["flowering_bloodwood_leaves"] = it }
+    val BLOODWOOD_SAPLING = SaplingBlock(BloodwoodSaplingGenerator(),FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)).also { regBlock["bloodwood_sapling"] = it }
     val BLOODWOOD_BUTTON = WoodenButtonBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().strength(0.5f).sounds(BlockSoundGroup.WOOD)).also { regBlock["bloodwood_button"] = it }
     val BLOODWOOD_DOOR = DoorBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(3.0f).sounds(BlockSoundGroup.WOOD).nonOpaque()).also { regBlock["bloodwood_door"] = it }
     val BLOODWOOD_PLANKS = Block(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(2.0f, 3.0f).sounds(BlockSoundGroup.WOOD)).also { regBlock["bloodwood_planks"] = it }
@@ -76,8 +92,29 @@ object RegisterBlock {
     val TEMPLE_STONE_SLAB = SlabBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_slab"] = it }
     val TEMPLE_STONE_STAIRS = StairsBlock(TEMPLE_STONE.defaultState,FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_stairs"] = it }
     val TEMPLE_STONE_WALL = WallBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_wall"] = it }
-    
+
+    val BLOODWOOD_TREE = ConfiguredFeatures.register(
+        "viscerae:bloodwood_tree",
+        Feature.TREE,
+        TreeFeatureConfig.Builder(
+            BlockStateProvider.of(Blocks.OAK_LOG),
+            BendingTrunkPlacer(4, 2, 0, 3, UniformIntProvider.create(1, 2)),
+            WeightedBlockStateProvider(
+                DataPool.builder<BlockState>().add(BLOODWOOD_LEAVES.defaultState, 5)
+                    .add(BLOODWOOD_LEAVES_FLOWERING.defaultState, 1)
+            ),
+            RandomSpreadFoliagePlacer(
+                ConstantIntProvider.create(3),
+                ConstantIntProvider.create(0),
+                ConstantIntProvider.create(2),
+                50
+            ),
+            TwoLayersFeatureSize(1, 0, 1)
+        ).dirtProvider(BlockStateProvider.of(Blocks.ROOTED_DIRT)).forceDirt().build()
+    )
+
     fun registerAll() {
+
         for (k in regBlock.keys) {
             registerBlock(k,regBlock[k])
         }

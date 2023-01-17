@@ -2,11 +2,11 @@
   "parent": "minecraft:block/cube",
   "textures": {
     "particle": "viscerae:block/trial_stone_top",
-    "north": "viscerae:block/trial_stone_front",
-    "south": "viscerae:block/trial_stone_front",
+    "north": "viscerae:block/trial_stone_side",
+    "south": "viscerae:block/trial_stone_side",
     "east": "viscerae:block/trial_stone_side",
     "west": "viscerae:block/trial_stone_side",
     "up": "viscerae:block/trial_stone_top",
-    "down": "viscerae:block/trial_stone_bottom"
+    "down": "minecraft:block/polished_blackstone"
   }
 }
