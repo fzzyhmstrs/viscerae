@@ -21,7 +21,7 @@ object RegisterItem {
     private val regItem: MutableMap<String, Item> = mutableMapOf()
 
     //basic materials
-    val BLOODSTEEL = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloodsteel"] = it}
+    val BLOODSTEEL_INGOT = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloodsteel_ingot"] = it}
     val BLOODSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloodstone"] = it}
     val BLOODY_GEM = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloody_gem"] = it}
     val CHICKEN_BONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["chicken_bone"] = it}
