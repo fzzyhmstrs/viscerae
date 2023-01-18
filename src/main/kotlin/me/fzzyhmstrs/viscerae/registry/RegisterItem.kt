@@ -1,13 +1,15 @@
 package me.fzzyhmstrs.viscerae.registry
 
-import me.fzzyhmstrs.amethyst_core.item_utils.CustomFlavorItem
+import me.fzzyhmstrs.amethyst_core.item_util.CustomFlavorItem
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_imbuement.item.CustomAxeItem
 import me.fzzyhmstrs.amethyst_imbuement.item.CustomHoeItem
 import me.fzzyhmstrs.amethyst_imbuement.item.CustomPickaxeItem
 import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.viscerae.armor.BloodsteelArmorMaterial
 import me.fzzyhmstrs.viscerae.armor.BloodstoneArmorMaterial
 import me.fzzyhmstrs.viscerae.armor.InsatiableArmorMaterial
+import me.fzzyhmstrs.viscerae.armor.TormentingArmorMaterial
 import me.fzzyhmstrs.viscerae.item.*
 import me.fzzyhmstrs.viscerae.tool.*
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -41,22 +43,22 @@ object RegisterItem {
     val INSATIABLE_HUNGER = SwordItem(BloodstoneToolMaterial,3,-2.4f,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_sword"] = it}
     
     //equipment
-    val BLOODSTEEL_HELMET = ArmorItem(BloodstoneArmorMaterial, EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_helmet"] = it}
-    val BLOODSTEEL_CHESTPLATE = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_chestplate"] = it}
-    val BLOODSTEEL_LEGGINGS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_leggings"] = it}
-    val BLOODSTEEL_BOOTS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_boots"] = it}
+    val BLOODSTEEL_HELMET = ArmorItem(BloodsteelArmorMaterial, EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_helmet"] = it}
+    val BLOODSTEEL_CHESTPLATE = ArmorItem(BloodsteelArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_chestplate"] = it}
+    val BLOODSTEEL_LEGGINGS = ArmorItem(BloodsteelArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_leggings"] = it}
+    val BLOODSTEEL_BOOTS = ArmorItem(BloodsteelArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_boots"] = it}
     val BLOODSTONE_HELMET = ArmorItem(BloodstoneArmorMaterial, EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_helmet"] = it}
     val BLOODSTONE_CHESTPLATE = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_chestplate"] = it}
     val BLOODSTONE_LEGGINGS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_leggings"] = it}
     val BLOODSTONE_BOOTS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_boots"] = it}
-    val INSATIABLE_GAZE = ArmorItem(IsatiableArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["instatiable_gaze"] = it}
+    val INSATIABLE_GAZE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["instatiable_gaze"] = it}
     val INSATIABLE_ENVY = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_envy"] = it}
     val INSATIABLE_STRIDE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_stride"] = it}
     val INSATIABLE_TREAD = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_tread"] = it}
     val TORMENTING_VEIL = ArmorItem(TormentingArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_veil"] = it}
     val TORMENTING_VESTMENT = ArmorItem(TormentingArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_vestment"] = it}
     val TORMENTING_GREAVES = ArmorItem(TormentingArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_leggings"] = it}
-    val TORMENTING_SABATONS = ArmorItem(TormentingArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_sabatons"] = it}
+    val TORMENTING_SABATONS = ArmorItem(TormentingArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_sabatons"] = it}
     
     //trinkets
     val BLOODY_BAND = BloodyBandItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["bloody_band"] = it}

@@ -1,14 +1,18 @@
 package me.fzzyhmstrs.viscerae.item
 
-import me.fzzyhmstrs.amethyst_core.item_util.interfaces.KillTracking
+import com.google.common.collect.HashMultimap
+import com.google.common.collect.Multimap
 import me.fzzyhmstrs.viscerae.config.VisceraeConfig
+import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.attribute.EntityAttribute
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.item.ItemStack
 import net.minecraft.item.SwordItem
 import net.minecraft.item.ToolMaterial
 import net.minecraft.server.world.ServerWorld
 
-class InsatiableHungerItem(material: ToolMaterial, attackDamage: Int, attackSpeed: Float, settings: Settings): SwordItem(material, attackDamage, attackSpeed, settings), KillTracking {
+class InsatiableHungerItem(material: ToolMaterial, attackDamage: Int, attackSpeed: Float, settings: Settings): SwordItem(material, attackDamage, attackSpeed, settings) {
 
     override fun postHit(stack: ItemStack, target: LivingEntity, attacker: LivingEntity): Boolean {
         val recentDamage = target.damageTracker.mostRecentDamage
@@ -20,19 +24,15 @@ class InsatiableHungerItem(material: ToolMaterial, attackDamage: Int, attackSpee
     }
 
     override fun onWearerKilledOther(stack: ItemStack, wearer: LivingEntity, victim: LivingEntity, world: ServerWorld) {
+        super.onWearerKilledOther(stack, wearer, victim, world)
+        incrementKillCount(stack)
         val nbt = stack.orCreateNbt
-        if (!nbt.contains("kills")){
-            nbt.putInt("kills",1)
-        } else {
-            val kills = nbt.getInt("kills")
-            nbt.putInt("kills",kills + 1)
-        }
-        if (!nbt.contains("charges")){
-            nbt.putInt("charges",1)
-        } else {
-            val kills = nbt.getInt("charges")
-            nbt.putInt("charges",kills + 1)
-        }
+    }
+
+    override fun getAttributeModifiers(slot: EquipmentSlot?): Multimap<EntityAttribute, EntityAttributeModifier> {
+        val attributeModifiers = HashMultimap.create(super.getAttributeModifiers(slot))
+
+        return attributeModifiers
     }
 
 }

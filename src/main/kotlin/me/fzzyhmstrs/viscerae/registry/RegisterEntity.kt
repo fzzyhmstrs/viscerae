@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.viscerae.registry
 
 import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.viscerae.entity.GoreLanceEntity
 import me.fzzyhmstrs.viscerae.entity.MarrowShardEntity
 import me.fzzyhmstrs.viscerae.entity.VampiricBoltEntity
 import me.fzzyhmstrs.viscerae.entity.block.BloodstainedAltarEntity
@@ -40,6 +41,19 @@ object RegisterEntity {
             SpawnGroup.MISC
         ) { entityType: EntityType<MarrowShardEntity>, world: World ->
             MarrowShardEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
+    )
+
+    val GORE_LANCE_ENTITY: EntityType<GoreLanceEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(Viscerae.MOD_ID, "gore_lance_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<GoreLanceEntity>, world: World ->
+            GoreLanceEntity(
                 entityType,
                 world
             )

@@ -8,17 +8,17 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
 @Suppress("PrivatePropertyName")
-object BloodstoneArmorMaterial : ArmorMaterial {
+object TormentingArmorMaterial : ArmorMaterial {
     private val BASE_DURABILITY = intArrayOf(13, 15, 16, 11)
-    private val PROTECTION_VALUES = intArrayOf(2, 5, 6, 2)
+    private val PROTECTION_VALUES = intArrayOf(4, 8, 10, 5)
 
 
-    override fun getName(): String = "viscerae_bloodstone"
+    override fun getName(): String = "viscerae_tormenting"
     override fun getEquipSound(): SoundEvent = SoundEvents.ITEM_ARMOR_EQUIP_IRON
-    override fun getRepairIngredient(): Ingredient? = Ingredient.ofItems(RegisterItem.BLOODSTONE)
-    override fun getEnchantability(): Int = 15
+    override fun getRepairIngredient(): Ingredient? = Ingredient.ofItems(RegisterItem.LIFEBLOOD_OF_THE_PACT)
+    override fun getEnchantability(): Int = 25
     override fun getProtectionAmount(slot: EquipmentSlot): Int = PROTECTION_VALUES[slot.entitySlotId]
-    override fun getDurability(slot: EquipmentSlot): Int = BASE_DURABILITY[slot.entitySlotId] * 19
-    override fun getKnockbackResistance(): Float = 0.0F
-    override fun getToughness(): Float = 0.5F
+    override fun getDurability(slot: EquipmentSlot): Int = BASE_DURABILITY[slot.entitySlotId] * 49
+    override fun getKnockbackResistance(): Float = 0.15F
+    override fun getToughness(): Float = 3F
 }

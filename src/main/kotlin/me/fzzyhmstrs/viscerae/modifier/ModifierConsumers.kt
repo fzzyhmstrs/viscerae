@@ -1,7 +1,8 @@
 package me.fzzyhmstrs.viscerae.modifier
 
+import me.fzzyhmstrs.amethyst_core.coding_util.PerLvlF
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
-import me.fzzyhmstrs.amethyst_core.modifier_util.WeaponModifier
+import me.fzzyhmstrs.amethyst_core.modifier_util.EquipmentModifier
 import me.fzzyhmstrs.amethyst_core.raycaster_util.RaycasterUtil
 import me.fzzyhmstrs.amethyst_core.registry.EventRegistry
 import me.fzzyhmstrs.amethyst_core.trinket_util.EffectQueue
@@ -15,19 +16,27 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 
+
 object ModifierConsumers {
 
+    private val BLOOD_SLASH_POWER = PerLvlF(8f,0.2f,0f)
+
     //weapon modifier consumers
-    val BLOOD_SLASH_USE_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val BLOOD_SLASH_USE_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             val rot = user.getRotationVec(1.0f)
             val nbt = stack.orCreateNbt
+            var power = 0
+            if (nbt.contains("slash_power")){
+                power = nbt.getInt("slash_power")
+            }
+            val dmg = BLOOD_SLASH_POWER.value(power)
             nbt.putInt("slash_power",0)
     }
         
-    val BLOOD_SLASH_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
-            if (target != null && !target.isAlive()){
+    val BLOOD_SLASH_HIT_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, _: LivingEntity, target: LivingEntity? ->
+            if (target != null && !target.isAlive){
                 val nbt = stack.orCreateNbt
                 var power = 0
                 if (nbt.contains("slash_power")){
@@ -37,8 +46,8 @@ object ModifierConsumers {
             }
     }
         
-    val BLOODTHIRSTY_USE_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val BLOODTHIRSTY_USE_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             user.damage(DamageSource.STARVE, 10f)
             EffectQueue.addStatusToQueue(user,RegisterStatus.BLOODTHIRST,160,0)
             EffectQueue.addStatusToQueue(user,StatusEffects.RESISTANCE,160,0)
@@ -47,8 +56,8 @@ object ModifierConsumers {
             }
     }
         
-    val BLOODTHIRSTY_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val BLOODTHIRSTY_HIT_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (user.hasStatusEffect(RegisterStatus.BLOODTHIRST)){
                 if (target != null && !target.isAlive()){
                     val effect = user.getStatusEffect(RegisterStatus.BLOODTHIRST)
@@ -62,8 +71,8 @@ object ModifierConsumers {
             }
     }
 
-    val DEADBLOW_USE_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val DEADBLOW_USE_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (target != null){
                 target.damage(DamageSource.MAGIC,10f)
                 target.takeKnockback(2.0,user.x - target.x,user.z - target.z)
@@ -74,8 +83,8 @@ object ModifierConsumers {
             }
     }
         
-    val FRENZIED_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val FRENZIED_HIT_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (target != null && !target.isAlive()){
                 val effect = user.getStatusEffect(RegisterStatus.BLOODLUST)
                 val amp = effect?.amplifier?:0
@@ -87,8 +96,8 @@ object ModifierConsumers {
             }
     }
         
-    val GLUTTONOUS_TICK_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val GLUTTONOUS_TICK_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (EventRegistry.ticker_40.isReady()){
                 if (stack.isDamaged && user is PlayerEntity){
                     val nbt = stack.nbt
@@ -99,27 +108,27 @@ object ModifierConsumers {
             }
     }
         
-    val INNER_FIRE_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val INNER_FIRE_HIT_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             target?.addStatusEffect(StatusEffectInstance(RegisterStatus.BLOOD_BOIL,100,1))
     }
         
-    val SOUL_BOMB_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val SOUL_BOMB_HIT_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (target != null && !target.isAlive()){
                 
             }
     }
         
-    val SOUL_CHAINS_USE_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val SOUL_CHAINS_USE_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (target != null){
                 val entityList = RaycasterUtil.raycastEntityArea(4.5, user, target.pos)
             }
     }
         
-    val VAMPIRIC_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val VAMPIRIC_HIT_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (target != null){
                 val recentDamage = target.damageTracker.mostRecentDamage
                 val recentAmount = recentDamage?.damage?:0f
@@ -128,8 +137,8 @@ object ModifierConsumers {
             }
     }
         
-    val VITAL_HIT_CONSUMER: WeaponModifier.WeaponConsumer =
-        WeaponModifier.WeaponConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
+    val VITAL_HIT_CONSUMER: EquipmentModifier.ToolConsumer =
+        EquipmentModifier.ToolConsumer {stack: ItemStack, user: LivingEntity, target: LivingEntity? ->
             if (target != null && !target.isAlive()){
                 
             }

@@ -1,7 +1,7 @@
 package me.fzzyhmstrs.viscerae.registry
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
-import me.fzzyhmstrs.amethyst_core.modifier_util.WeaponModifier
+import me.fzzyhmstrs.amethyst_core.modifier_util.EquipmentModifier
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.viscerae.Viscerae
 import me.fzzyhmstrs.viscerae.modifier.ModifierConsumers
@@ -15,30 +15,30 @@ object RegisterModifier {
     private val regMod: MutableList<AugmentModifier> = mutableListOf()
 
     //weapon modifiers
-    val BLOOD_SLASH = WeaponModifier(Identifier(Viscerae.MOD_ID,"blood_slash"))
+    val BLOOD_SLASH = EquipmentModifier(Identifier(Viscerae.MOD_ID,"blood_slash"))
         .withOnUse(ModifierConsumers.BLOOD_SLASH_USE_CONSUMER)
         .withPostHit(ModifierConsumers.BLOOD_SLASH_HIT_CONSUMER)
-    val BLOODTHIRSTY = WeaponModifier(Identifier(Viscerae.MOD_ID,"bloodthirsty"))
+    val BLOODTHIRSTY = EquipmentModifier(Identifier(Viscerae.MOD_ID,"bloodthirsty"))
         .withAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,"083dcbc6-908f-11ed-a1eb-0242ac120002",1.0,EntityAttributeModifier.Operation.ADDITION)
         .withOnUse(ModifierConsumers.BLOODTHIRSTY_USE_CONSUMER)
         .withPostHit(ModifierConsumers.BLOODTHIRSTY_HIT_CONSUMER)
-    val DEADBLOW = WeaponModifier(Identifier(Viscerae.MOD_ID,"deadblow"))
+    val DEADBLOW = EquipmentModifier(Identifier(Viscerae.MOD_ID,"deadblow"))
         .withAttributeModifier(EntityAttributes.GENERIC_ATTACK_KNOCKBACK,"gr59yl13-908f-11ed-a1eb-0242ac120002",0.5,EntityAttributeModifier.Operation.ADDITION)
         .withOnUse(ModifierConsumers.DEADBLOW_USE_CONSUMER)
-    val FRENZIED = WeaponModifier(Identifier(Viscerae.MOD_ID,"frenzied"))
+    val FRENZIED = EquipmentModifier(Identifier(Viscerae.MOD_ID,"frenzied"))
         .withPostHit(ModifierConsumers.FRENZIED_HIT_CONSUMER)
-    val GLUTTONOUS = WeaponModifier(Identifier(Viscerae.MOD_ID,"gluttonous"))
+    val GLUTTONOUS = EquipmentModifier(Identifier(Viscerae.MOD_ID,"gluttonous"))
         .withTick(ModifierConsumers.GLUTTONOUS_TICK_CONSUMER)
-    val INNER_FIRE = WeaponModifier(Identifier(Viscerae.MOD_ID,"inner_fire"))
+    val INNER_FIRE = EquipmentModifier(Identifier(Viscerae.MOD_ID,"inner_fire"))
         .withAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED,"14ae83tp-908f-11ed-a1eb-0242ac120002",1.0,EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
         .withPostHit(ModifierConsumers.INNER_FIRE_HIT_CONSUMER)
-    val SOUL_BOMB = WeaponModifier(Identifier(Viscerae.MOD_ID,"soul_bomb"))
+    val SOUL_BOMB = EquipmentModifier(Identifier(Viscerae.MOD_ID,"soul_bomb"))
         .withPostHit(ModifierConsumers.SOUL_BOMB_HIT_CONSUMER)
-    val SOUL_CHAINS = WeaponModifier(Identifier(Viscerae.MOD_ID,"soul_chains"))
+    val SOUL_CHAINS = EquipmentModifier(Identifier(Viscerae.MOD_ID,"soul_chains"))
         .withOnUse(ModifierConsumers.SOUL_CHAINS_USE_CONSUMER)
-    val VAMPIRIC = WeaponModifier(Identifier(Viscerae.MOD_ID,"vampiric"))
+    val VAMPIRIC = EquipmentModifier(Identifier(Viscerae.MOD_ID,"vampiric"))
         .withPostHit(ModifierConsumers.VAMPIRIC_HIT_CONSUMER)
-    val VITAL = WeaponModifier(Identifier(Viscerae.MOD_ID,"vital"))
+    val VITAL = EquipmentModifier(Identifier(Viscerae.MOD_ID,"vital"))
         .withPostHit(ModifierConsumers.VITAL_HIT_CONSUMER)
 
     //scepter modifiers

@@ -11,13 +11,7 @@ import net.minecraft.server.world.ServerWorld
 class RingOfSoulsItem(settings: Settings): AbstractAugmentJewelryItem(settings) {
 
     override fun onWearerKilledOther(stack: ItemStack, wearer: LivingEntity, victim: LivingEntity, world: ServerWorld) {
-        val nbt = stack.orCreateNbt
-        if (!nbt.contains("kills")){
-            nbt.putInt("kills",1)
-        } else {
-            val kills = nbt.getInt("kills")
-            nbt.putInt("kills",kills + 1)
-        }
+        incrementKillCount(stack)
         super.onWearerKilledOther(stack, wearer, victim, world)
     }
 
