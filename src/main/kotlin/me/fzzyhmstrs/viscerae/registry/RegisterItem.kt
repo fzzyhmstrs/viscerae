@@ -1,5 +1,6 @@
 package me.fzzyhmstrs.viscerae.registry
 
+import me.fzzyhmstrs.amethyst_core.item_utils.CustomFlavorItem
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_imbuement.item.CustomAxeItem
 import me.fzzyhmstrs.amethyst_imbuement.item.CustomHoeItem
@@ -23,11 +24,11 @@ object RegisterItem {
     //basic materials
     val BLOODSTEEL_INGOT = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloodsteel_ingot"] = it}
     val BLOODSTONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloodstone"] = it}
-    val BLOODY_GEM = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloody_gem"] = it}
-    val CHICKEN_BONE = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["chicken_bone"] = it}
+    val BLOODY_GEM = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["bloody_gem"] = it}
+    val CHICKEN_BONE = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["chicken_bone"] = it}
     val CORRUPTED_HEART = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["corrupted_heart"] = it}
-    val ENSOULED_GEM = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["ensouled_gem"] = it}
-    val LIFEBLOOD_OF_THE_PACT = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC)).also{ regItem["lifeblood_of_the_pact"] = it}
+    val ENSOULED_GEM = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)).also{ regItem["ensouled_gem"] = it}
+    val LIFEBLOOD_OF_THE_PACT = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC)).also{ regItem["lifeblood_of_the_pact"] = it}
     val VISCERA = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.COMMON)).also{ regItem["viscera"] = it}
 
     //tools
@@ -48,10 +49,10 @@ object RegisterItem {
     val BLOODSTONE_CHESTPLATE = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_chestplate"] = it}
     val BLOODSTONE_LEGGINGS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_leggings"] = it}
     val BLOODSTONE_BOOTS = ArmorItem(BloodstoneArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_boots"] = it}
-    val INSATIABLE_GAZE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["instatiable_gaze"] = it}
+    val INSATIABLE_GAZE = ArmorItem(IsatiableArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["instatiable_gaze"] = it}
     val INSATIABLE_ENVY = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_envy"] = it}
     val INSATIABLE_STRIDE = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["insatiable_stride"] = it}
-    val INSATIABLE_TREAD = ArmorItem8(InsatiableArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_tread"] = it}
+    val INSATIABLE_TREAD = ArmorItem(InsatiableArmorMaterial,EquipmentSlot.FEET,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["bloodstone_tread"] = it}
     val TORMENTING_VEIL = ArmorItem(TormentingArmorMaterial,EquipmentSlot.HEAD,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_veil"] = it}
     val TORMENTING_VESTMENT = ArmorItem(TormentingArmorMaterial,EquipmentSlot.CHEST,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_vestment"] = it}
     val TORMENTING_GREAVES = ArmorItem(TormentingArmorMaterial,EquipmentSlot.LEGS,FabricItemSettings().group(ItemGroup.COMBAT)).also{ regItem["tormenting_leggings"] = it}
@@ -67,13 +68,13 @@ object RegisterItem {
     val LOCKET_OF_YOUTH = LocketOfYouthItem(FabricItemSettings().maxDamage(250).group(ItemGroup.MISC)).also{ regItem["locket_of_youth"] = it}
     
     //altar offerings
-    val DEPRAVED_POPPET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["depraved_poppet"] = it}
-    val GILDED_FOOT = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["gilded_foot"] = it}
-    val GRISLY_POPPET = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["grisly_poppet"] = it}
-    val RUNE_OF_ETERNITY = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC)).also{ regItem["rune_of_eternity"] = it}
-    val RUNE_OF_POWER = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_power"] = it}
-    val RUNE_OF_VITALITY = Item(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_vitality"] = it}
-    val TALISMAN_OF_BONES = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["talisman_of_bones"] = it}
+    val DEPRAVED_POPPET = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["depraved_poppet"] = it}
+    val GILDED_FOOT = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["gilded_foot"] = it}
+    val GRISLY_POPPET = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["grisly_poppet"] = it}
+    val RUNE_OF_ETERNITY = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.EPIC)).also{ regItem["rune_of_eternity"] = it}
+    val RUNE_OF_POWER = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_power"] = it}
+    val RUNE_OF_VITALITY = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_vitality"] = it}
+    val TALISMAN_OF_BONES = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["talisman_of_bones"] = it}
     val SOUL_CANDLE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["soul_candle"] = it}
 
     val BLOODY_SCEPTER = CustomScepterItem(VisceraeT1ScepterToolMaterial(VISCERA),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
