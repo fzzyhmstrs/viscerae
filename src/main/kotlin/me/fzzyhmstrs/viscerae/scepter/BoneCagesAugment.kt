@@ -21,7 +21,7 @@ import kotlin.math.min
 class BoneCagesAugment(tier: Int, maxLvl: Int, vararg slot: EquipmentSlot): MiscAugment(tier, maxLvl, *slot) {
 
     override val baseEffect: AugmentEffect
-        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(5.8F,0.2F)
+        get() = super.baseEffect.withAmplifier(11,1,0).withDamage(1.8F,0.2F)
 
     override fun effect(
         world: World,
