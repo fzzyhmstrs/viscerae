@@ -1,4 +1,4 @@
-package me.fzzyhmstrs.amethyst_imbuement.scepter
+package me.fzzyhmstrs.viscerae.scepter
 
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentConsumer
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentEffect
