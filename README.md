@@ -12,6 +12,7 @@
 * Altar Recipe Format
 * Overworld cave biome
 * Nether biome
+* Make and add some sounds
 * Construct temple bits for patterns
 * Construct temples for boss fights
 * Construct smaller temples for trials
