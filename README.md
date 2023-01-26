@@ -20,6 +20,8 @@
 * Pathcouli Book
 * Wiki
 * Add some more biome-blocks
+* Implement mushroom blocks
+* Add potion brewing recipes -> Potion of Blood Boil, Potion of Wither
 * Develop trial system
 * Develop proper recipes for tiering
 * Develop data-pack system for altar offerings
