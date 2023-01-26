@@ -92,6 +92,16 @@ object RegisterBlock {
     val TEMPLE_STONE_SLAB = SlabBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_slab"] = it }
     val TEMPLE_STONE_STAIRS = StairsBlock(TEMPLE_STONE.defaultState,FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_stairs"] = it }
     val TEMPLE_STONE_WALL = WallBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_wall"] = it }
+    
+    //biome blocks
+    val DEATHCAP_MUSHROOM = DeathcapMushroomBlock(FabricBlockSettings.of(Material.GRASS, MapColor.RED).nonOpaque().breaksInstantly()).also { regBlock["deathcap_mushroom"] = it }
+    val DEATHCAP_MUSHROOM_BLOCK = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["deathcap_mushroom_block"] = it }
+    val DEATHCAP_MUSHROOM_STEM = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["deathcap_mushroom_stem"] = it }
+    val RAZOR_GRASS = GrassBlock(FabricBlockSettings.of(Material.GRASS, MapColor.RED).nonOpaque().breaksInstantly()).also { regBlock["razor_grass"] = it }
+    val UMBRAL_GRANITE = Block(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["razor_grass"] = it }
+    val UMBRAL_MUSHROOM = UmbralMushroomBlock(FabricBlockSettings.of(Material.GRASS, MapColor.RED).nonOpaque().breaksInstantly()).also { regBlock["umbral_mushroom"] = it }
+    val UMBRAL_MUSHROOM_BLOCK = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["umbral_mushroom_block"] = it }
+    val UMBRAL_MUSHROOM_STEM = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["umbral_mushroom_stem"] = it }
 
     val BLOODWOOD_TREE = ConfiguredFeatures.register(
         "viscerae:bloodwood_tree",
