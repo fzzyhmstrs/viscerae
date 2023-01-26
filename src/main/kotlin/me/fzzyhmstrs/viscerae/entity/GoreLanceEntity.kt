@@ -45,8 +45,7 @@ class GoreLanceEntity(entityType: EntityType<out GoreLanceEntity?>, world: World
         this.setPosition(pos)
     }
 
-    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(6.0F).withAmplifier(2).withRange(4.0)
-    private var canSplit = true
+    override var entityEffects: AugmentEffect = AugmentEffect().withDamage(7.5F)
 
     override fun passEffects(ae: AugmentEffect, level: Int) {
         super.passEffects(ae, level)
@@ -72,20 +71,6 @@ class GoreLanceEntity(entityType: EntityType<out GoreLanceEntity?>, world: World
                 if (entity2 is LivingEntity) {
                     entityEffects.accept(entity2, AugmentConsumer.Type.HARMFUL)
                 }
-                if (!entity2.isAlive && canSplit) {
-                    val range = entityEffects.range(0)
-                    val box = Box(this.pos.add(range,range,range),this.pos.subtract(range,range,range))
-                    val entities = world.getOtherEntities(this, box)
-                    for (i in 0 until min(entityEffects.amplifier(0),entities.size)){
-                        val entity3 = entities[i]
-                        if (entity3 !is LivingEntity) continue
-                        val rot = entity2.pos.subtract(entity3.pos).normalize()
-                        val shard = GoreLanceEntity(world,entity,2.0f,0.35f,this.pos,rot)
-                        shard.canSplit = false
-                        world.spawnEntity(shard)
-                        world.playSound(null,this.blockPos,RegisterEnchantment.MARROW_SHARDS.soundEvent(),SoundCategory.NEUTRAL,1.0f,world.getRandom().nextFloat() * 0.4f + 0.8f)
-                    }
-                }
             }
         }
         discard()
@@ -96,7 +81,7 @@ class GoreLanceEntity(entityType: EntityType<out GoreLanceEntity?>, world: World
     }
 
     companion object{
-        fun createMarrowShard(world: World, user: LivingEntity, speed: Float, div: Float,yaw: Float, effects: AugmentEffect, level: Int): GoreLanceEntity {
+        fun createGoreLance(world: World, user: LivingEntity, speed: Float, div: Float,yaw: Float, effects: AugmentEffect, level: Int): GoreLanceEntity {
             val fbe = GoreLanceEntity(
                 world, user,yaw, speed, div,
                 user.x - (user.width + 0.5f) * 0.5 * MathHelper.sin(user.bodyYaw * (Math.PI.toFloat() / 180)) * MathHelper.cos(
