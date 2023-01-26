@@ -66,6 +66,7 @@ class GoreLanceEntity(entityType: EntityType<out GoreLanceEntity?>, world: World
                 entityEffects.damage(0)
             )
             if (bl) {
+                entity.heal(0.25f)
                 entityEffects.accept(entity, AugmentConsumer.Type.BENEFICIAL)
                 applyDamageEffects(entity as LivingEntity?, entity2)
                 if (entity2 is LivingEntity) {
