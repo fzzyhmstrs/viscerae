@@ -13,6 +13,10 @@ object RegisterEnchantment {
 
     private val regEnchant: MutableMap<String, Enchantment> = mutableMapOf()
 
+    val BONE_CAGES = BoneCagesAugment(2,6,EquipmentSlot.MAINHAND).also{regEnchant["bone_cages"] = it}
+    val ENNERVATE = EnnervateAugment(3,6,EquipmentSlot.MAINHAND).also{regEnchant["ennervate"] = it}
+    val GORE_LANCES = GoreLancesAugment(3,11,EquipmentSlot.MAINHAND).also{regEnchant["gore_lances"] = it}
+    val INFUSION = InfusionAugment(1,11,EquipmentSlot.MAINHAND).also{regEnchant["infusion"] = it}
     val IRON_SKIN = IronSkinAugment(1,15,EquipmentSlot.MAINHAND).also{regEnchant["iron_skin"] = it}
     val LEECH_LIFE = LeechLifeAugment(1,11, EquipmentSlot.MAINHAND).also{regEnchant["leech_life"] = it}
     val MARROW_SHARDS = MarrowShardsAugment(2,16, EquipmentSlot.MAINHAND).also{regEnchant["marrow_shards"] = it}
