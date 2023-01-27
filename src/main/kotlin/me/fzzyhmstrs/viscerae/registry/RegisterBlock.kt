@@ -94,14 +94,13 @@ object RegisterBlock {
     val TEMPLE_STONE_WALL = WallBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_wall"] = it }
     
     //biome blocks
-    val DEATHCAP_MUSHROOM = DeathcapMushroomBlock(FabricBlockSettings.of(Material.GRASS, MapColor.RED).nonOpaque().breaksInstantly()).also { regBlock["deathcap_mushroom"] = it }
-    val DEATHCAP_MUSHROOM_BLOCK = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["deathcap_mushroom_block"] = it }
-    val DEATHCAP_MUSHROOM_STEM = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["deathcap_mushroom_stem"] = it }
-    val RAZOR_GRASS = GrassBlock(FabricBlockSettings.of(Material.GRASS, MapColor.RED).nonOpaque().breaksInstantly()).also { regBlock["razor_grass"] = it }
+    val DEATHCAP_MUSHROOM = DeathcapMushroomBlock(FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance { _ -> 1 }
+        .postProcess { _, _, _ -> always() }).also { regBlock["deathcap_mushroom"] = it }
+    val DEATHCAP_MUSHROOM_BLOCK = MushroomBlock(FabricBlockSettings.of(Material.WOOD, MapColor.BROWN)).also { regBlock["deathcap_mushroom_block"] = it }
+    val RAZOR_GRASS = FernBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offsetType(AbstractBlock.OffsetType.XYZ)).also { regBlock["razor_grass"] = it }
     val UMBRAL_GRANITE = Block(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["razor_grass"] = it }
-    val UMBRAL_MUSHROOM = UmbralMushroomBlock(FabricBlockSettings.of(Material.GRASS, MapColor.RED).nonOpaque().breaksInstantly()).also { regBlock["umbral_mushroom"] = it }
-    val UMBRAL_MUSHROOM_BLOCK = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["umbral_mushroom_block"] = it }
-    val UMBRAL_MUSHROOM_STEM = Block(FabricBlockSettings.of(Material.GRASS, MapColor.RED)).also { regBlock["umbral_mushroom_stem"] = it }
+    val UMBRAL_MUSHROOM = UmbralMushroomBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().breakInstantly()).also { regBlock["umbral_mushroom"] = it }
+    val UMBRAL_MUSHROOM_BLOCK = MushroomBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED)).also { regBlock["umbral_mushroom_block"] = it }
 
     val BLOODWOOD_TREE = ConfiguredFeatures.register(
         "viscerae:bloodwood_tree",
@@ -133,6 +132,10 @@ object RegisterBlock {
     private fun registerBlock(path: String, block:Block?){
         Registry.register(Registry.BLOCK, Identifier(Viscerae.MOD_ID, path), block)
         Registry.register(Registry.ITEM, Identifier(Viscerae.MOD_ID,path), BlockItem(block,FabricItemSettings()))
+    }
+
+    private fun always(): Boolean {
+        return true
     }
     
     private fun never(): Boolean {

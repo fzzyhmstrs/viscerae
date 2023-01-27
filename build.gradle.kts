@@ -23,6 +23,9 @@ repositories {
     flatDir {
         dirs("F:\\Documents\\Mod Libraries\\ac\\build\\libs")
     }
+    flatDir {
+        dirs("F:\\Documents\\Mod Libraries\\fc\\build\\libs")
+    }
 }
 dependencies {
     val minecraftVersion: String by project
@@ -38,6 +41,11 @@ dependencies {
 
     val acVersion: String by project
     modImplementation(":amethyst_core-$acVersion"){
+        exclude("net.fabricmc.fabric-api")
+    }
+
+    val fcVersion: String by project
+    modImplementation(":fzzy_core-$fcVersion"){
         exclude("net.fabricmc.fabric-api")
     }
 

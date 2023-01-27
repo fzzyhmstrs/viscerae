@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.viscerae.registry
 
 import me.fzzyhmstrs.amethyst_core.entity_util.MissileEntityRenderer
+import me.fzzyhmstrs.viscerae.model.BoneCageEntityRenderer
 import me.fzzyhmstrs.viscerae.model.GoreLanceEntityRenderer
 import me.fzzyhmstrs.viscerae.model.MarrowShardEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
@@ -34,6 +35,14 @@ object RegisterRenderer {
             RegisterEntity.GORE_LANCE_ENTITY
         ) { context: EntityRendererFactory.Context ->
             GoreLanceEntityRenderer(
+                context
+            )
+        }
+
+        EntityRendererRegistry.register(
+            RegisterEntity.BONE_CAGE_ENTITY
+        ) { context: EntityRendererFactory.Context ->
+            BoneCageEntityRenderer(
                 context
             )
         }

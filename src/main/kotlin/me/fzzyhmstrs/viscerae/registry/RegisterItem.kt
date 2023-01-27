@@ -1,6 +1,6 @@
 package me.fzzyhmstrs.viscerae.registry
 
-import me.fzzyhmstrs.amethyst_core.item_util.CustomFlavorItem
+import me.fzzyhmstrs.fzzy_core.item_util.CustomFlavorItem
 import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
 import me.fzzyhmstrs.amethyst_imbuement.item.CustomAxeItem
 import me.fzzyhmstrs.amethyst_imbuement.item.CustomHoeItem

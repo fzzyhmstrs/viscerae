@@ -1,6 +1,7 @@
 package me.fzzyhmstrs.viscerae.registry
 
 import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.viscerae.entity.BoneCageEntity
 import me.fzzyhmstrs.viscerae.entity.GoreLanceEntity
 import me.fzzyhmstrs.viscerae.entity.MarrowShardEntity
 import me.fzzyhmstrs.viscerae.entity.VampiricBoltEntity
@@ -58,6 +59,19 @@ object RegisterEntity {
                 world
             )
         }.dimensions(EntityDimensions.fixed(0.3125f, 0.3125f)).build()
+    )
+
+    val BONE_CAGE_ENTITY: EntityType<BoneCageEntity> = Registry.register(
+        Registry.ENTITY_TYPE,
+        Identifier(Viscerae.MOD_ID, "bone_cage_entity"),
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC
+        ) { entityType: EntityType<BoneCageEntity>, world: World ->
+            BoneCageEntity(
+                entityType,
+                world
+            )
+        }.dimensions(EntityDimensions.fixed(0.7f, 1.0f)).trackRangeChunks(6).trackedUpdateRate(2).build()
     )
 
     /////////////////////////////////////
