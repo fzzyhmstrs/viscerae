@@ -94,6 +94,8 @@ object RegisterBlock {
     val TEMPLE_STONE_WALL = WallBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["temple_stone_wall"] = it }
     
     //biome blocks
+    val BLOOD_VINES = BloodVinesBodyBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.CAVE_VINES)).also { regBlock["blood_vines"] = it }
+    val BLOOD_VINES_PLANT = BloodVinesHeadBlock(FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.CAVE_VINES)).also { regBlock["blood_vines_plant"] = it }
     val DEATHCAP_MUSHROOM = DeathcapMushroomBlock(FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance { _ -> 1 }
         .postProcess { _, _, _ -> always() }).also { regBlock["deathcap_mushroom"] = it }
     val DEATHCAP_MUSHROOM_BLOCK = MushroomBlock(FabricBlockSettings.of(Material.WOOD, MapColor.BROWN)).also { regBlock["deathcap_mushroom_block"] = it }
