@@ -35,6 +35,7 @@ object RegisterBlock {
     val OFFERING_SLAB = OfferingSlabBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["offering_slab"] = it }
     val STONY_ALTAR = AltarBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.STONE)).also { regBlock["stony_altar"] = it }
     val TRIAL_STONE = TrialBlock(FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).requiresTool().strength(5000F,3600000.0f).sounds(BlockSoundGroup.METAL)).also { regBlock["trial_stone"] = it }
+    val SOUL_CANDLE = SoulCandleBlock(FabricBlockSettings.of(Material.DECORATION, MapColor.OFF_WHITE).nonOpaque().strength(0.1f).sounds(BlockSoundGroup.CANDLE).luminance(SoulCandleBlock.STATE_TO_LUMINANCE)).also{ regBlock["soul_candle"] = it}
     
     //bloodstone
     val BLOODSTONE_BLACKSTONE_ORE = OreBlock(FabricBlockSettings.of(Material.STONE, MapColor.IRON_GRAY).requiresTool().strength(1.5f, 6.0f).sounds(BlockSoundGroup.STONE),UniformIntProvider.create(1,2)).also { regBlock["bloodstone_blackstone_ore"] = it }
