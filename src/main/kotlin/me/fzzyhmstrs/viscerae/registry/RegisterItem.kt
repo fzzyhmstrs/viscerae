@@ -77,7 +77,6 @@ object RegisterItem {
     val RUNE_OF_POWER = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_power"] = it}
     val RUNE_OF_VITALITY = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC).rarity(Rarity.RARE)).also{ regItem["rune_of_vitality"] = it}
     val TALISMAN_OF_BONES = CustomFlavorItem(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["talisman_of_bones"] = it}
-    val SOUL_CANDLE = Item(FabricItemSettings().group(ItemGroup.MISC)).also{ regItem["soul_candle"] = it}
 
     val BLOODY_SCEPTER = CustomScepterItem(VisceraeT1ScepterToolMaterial(VISCERA),FabricItemSettings().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON))
         .withAugments(listOf(RegisterEnchantment.VAMPIRIC_BOLT))
