@@ -37,12 +37,12 @@ class TrialBlock(settings: Settings): BlockWithEntity(settings){
 
     @Deprecated("Deprecated in Java")
     override fun onUse(
-        state: BlockState?,
-        world: World?,
-        pos: BlockPos?,
-        player: PlayerEntity?,
-        hand: Hand?,
-        hit: BlockHitResult?
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        player: PlayerEntity,
+        hand: Hand,
+        hit: BlockHitResult
     ): ActionResult {
         return super.onUse(state, world, pos, player, hand, hit)
     }

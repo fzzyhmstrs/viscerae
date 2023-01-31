@@ -2,9 +2,8 @@
   "required": true,
   "package": "me.fzzyhmstrs.viscerae.mixins",
   "compatibilityLevel": "JAVA_16",
-  "client": [
-  ],
-  "mixin": [
+  "mixins": [
+    "PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
