@@ -25,6 +25,8 @@ import net.minecraft.world.World
 object Trials: SimpleSynchronousResourceReloadListener {
 
     private val trialMap: MutableMap<Identifier,TrialData> = mutableMapOf()
+    private val keyMap: ArrayListMultiMap<Item,Identifier> = ArrayListMultiMap.create()
+    private val keyRawMap: MutableMap<Identifier,Ingredient> = mutableMapOf()
     private val reloaderId = Identifier(Viscerae.MOD_ID,"trial_reloader")
     private val numberDeserializer = GsonBuilder().registerTypeHierarchyAdapter(LootNumberProvider::class.java,LootNumberProviderTypes.createGsonSerializer()).create()
     private val FALLBACK_LOOT = "gameplay/fallback_trial_loot"
@@ -36,6 +38,22 @@ object Trials: SimpleSynchronousResourceReloadListener {
 
     fun getTrialData(trial: Identifier): TrialData?{
         return trialMap[trial]
+    }
+    
+    fun checkKeyItem(item: Item): List<Identifier>{
+        if (keyMap.isEmpty()){
+            processKeyMap()
+        }
+        return keyMap.get(item)
+    }
+    
+    private fun processKeyMap(){
+        for (entry in keyRawMap){
+            val id = entry.key
+            for (stack in entry.value.matchingStacks){
+                keyMap.put(stack.item,id)
+            }
+        }
     }
 
     class TrialData(id: Identifier,
@@ -97,6 +115,8 @@ object Trials: SimpleSynchronousResourceReloadListener {
 
     override fun reload(manager: ResourceManager) {
         trialMap.clear()
+        keyMap.clear()
+        keyRawMap.clear()
         manager.findResources("trial_data"
         ) { path: Identifier ->
             path.path.endsWith(".json")
@@ -112,159 +132,167 @@ object Trials: SimpleSynchronousResourceReloadListener {
         try {
             val reader = resource.reader
             val json = JsonParser.parseReader(reader).asJsonObject
-            val jsonId = json.get("id")
-            if (!jsonId.isJsonPrimitive){
-                Viscerae.LOGGER.error("Invalid trial identifier $jsonId in trial file: $id")
-
-            } else {
-                val trialId = Identifier.tryParse(jsonId.asString)
-                if (trialId == null){
-                    Viscerae.LOGGER.error("Couldn't parse identifier $jsonId in trial file: $id")
+            val mobLists: MutableMap<String,ArrayList<Identifier>> = mutableMapOf()
+            val jsonMobLists = json.get("mob_lists")
+            if (jsonMobLists != null) {
+                if (!jsonMobLists.isJsonObject) {
+                    Viscerae.LOGGER.error("Invalid default mob list: $json in trial file: $id")
                 } else {
-                    val mobLists: MutableMap<String,ArrayList<Identifier>> = mutableMapOf()
-                    val jsonMobLists = json.get("mob_lists")
-                    if (jsonMobLists != null) {
-                        if (!jsonMobLists.isJsonObject) {
-                            Viscerae.LOGGER.error("Invalid default mob list: $json in trial file: $id")
+                    val jsonDefaultLists = jsonMobLists.asJsonObject
+                    var failed = false
+                    for (mobList in jsonDefaultLists.entrySet()) {
+                        val mobListElement = mobList.value
+                        if (mobListElement !is JsonArray) {
+                            Viscerae.LOGGER.error("Invalid default mob list: $mobListElement in trial file: $id")
+                            failed = true
+                            break
                         } else {
-                            val jsonDefaultLists = jsonMobLists.asJsonObject
-                            var failed = false
-                            for (mobList in jsonDefaultLists.entrySet()) {
-                                val mobListElement = mobList.value
-                                if (mobListElement !is JsonArray) {
-                                    Viscerae.LOGGER.error("Invalid default mob list: $mobListElement in trial file: $id")
-                                    failed = true
-                                    break
-                                } else {
-                                    val result = deserializeMobList(mobListElement)
-                                    if (result.first != "") {
-                                        Viscerae.LOGGER.error("Problem deserializing mob list: [${result.first}] in trial file: $id")
-                                        failed = true
-                                        break
-                                    }
-                                    mobLists[mobList.key] = result.second
-                                }
+                            val result = deserializeMobList(mobListElement)
+                            if (result.first != "") {
+                                Viscerae.LOGGER.error("Problem deserializing mob list: [${result.first}] in trial file: $id")
+                                failed = true
+                                break
                             }
-                            if (failed){
-                                return
-                            }
+                            mobLists[mobList.key] = result.second
                         }
-
                     }
-                    val jsonWaves = json.get("trial_waves")
-                    if (jsonWaves == null || !jsonWaves.isJsonArray){
-                        Viscerae.LOGGER.error("Invalid trials list (not an array) in trial file: $id")
+                    if (failed){
+                        return
+                    }
+                }
+
+            }
+            val jsonWaves = json.get("trial_waves")
+            if (jsonWaves == null || !jsonWaves.isJsonArray){
+                Viscerae.LOGGER.error("Invalid trials list (not an array) in trial file: $id")
+            } else {
+                val waves = jsonWaves.asJsonArray
+                if (waves.isEmpty){
+                    Viscerae.LOGGER.error("empty waves array in trial file: $id")
+                    return
+                }
+                var failed = false
+                val waveData: ArrayListMultimap<Int,TrialData.WaveData> = ArrayListMultimap.create()
+                for (it in waves) {
+                    if (!it.isJsonObject){
+                        Viscerae.LOGGER.error("Invalid trial object $it in trial file: $id")
+                        failed = true
+                        break
                     } else {
-                        val waves = jsonWaves.asJsonArray
-                        if (waves.isEmpty){
-                            Viscerae.LOGGER.error("empty waves array in trial file: $id")
-                            return
-                        }
-                        var failed = false
-                        val waveData: ArrayListMultimap<Int,TrialData.WaveData> = ArrayListMultimap.create()
-                        for (it in waves) {
-                            if (!it.isJsonObject){
-                                Viscerae.LOGGER.error("Invalid trial object $it in trial file: $id")
+                        val jsonTime = (it as JsonObject).get("wave_time")
+                        val waveTime = if (jsonTime == null){
+                            0
+                        } else {
+                            if (!jsonTime.isJsonPrimitive){
+                                Viscerae.LOGGER.error("Invalid luck modifier $it in trial file: $id")
                                 failed = true
                                 break
                             } else {
-                                val jsonTime = (it as JsonObject).get("wave_time")
-                                val waveTime = if (jsonTime == null){
-                                    0
-                                } else {
-                                    if (!jsonTime.isJsonPrimitive){
-                                        Viscerae.LOGGER.error("Invalid luck modifier $it in trial file: $id")
-                                        failed = true
-                                        break
-                                    } else {
-                                        jsonTime.asInt
-                                    }
-                                }
-                                val jsonTrial = it.get("wave_count")
-                                val numberProvider: LootNumberProvider = if (jsonTrial == null){
-                                    ConstantLootNumberProvider.create(5f)
-                                } else {
-                                    numberDeserializer.fromJson(jsonTrial, LootNumberProvider::class.java)
-                                }
-                                val jsonLuck = it.get("luck_modifier")
-                                val luckModifier = if (jsonLuck == null){
-                                    0f
-                                } else {
-                                    if (!jsonLuck.isJsonPrimitive){
-                                        Viscerae.LOGGER.error("Invalid luck modifier $it in trial file: $id")
-                                        failed = true
-                                        break
-                                    } else {
-                                        jsonLuck.asFloat
-                                    }
-                                }
-                                val jsonMultiplier = it.get("luck_modifier")
-                                val playerModifier = if (jsonMultiplier == null){
-                                    0f
-                                } else {
-                                    if (!jsonMultiplier.isJsonPrimitive){
-                                        Viscerae.LOGGER.error("Invalid player modifier $it in trial file: $id")
-                                        failed = true
-                                        break
-                                    } else {
-                                        jsonMultiplier.asFloat
-                                    }
-                                }
-                                val jsonText = it.get("wave_message")
-                                val waveMessage = if (jsonText == null){
-                                    AcText.empty()
-                                } else {
-                                    Text.Serializer.fromJson(jsonText)
-                                }
-                                if (waveMessage == null){
-                                    Viscerae.LOGGER.error("Wave message $jsonText null for some reason, in trial file: $id")
-                                    failed = true
-                                    break
-                                }
-                                val jsonMobs = it.get("mobs")
-                                var mobs: ArrayList<Identifier> = ArrayList()
-                                if (!jsonMobs.isJsonArray){
-                                    if (jsonMobs.isJsonPrimitive){
-                                        val jsonMobKey =  jsonMobs.asString
-                                        if (!mobLists.containsKey(jsonMobKey)){
-                                            Viscerae.LOGGER.error("Invalid default mob list reference $it in trial file: $id")
-                                        } else {
-                                            val mobsTemp = mobLists[jsonMobKey]
-                                            if (mobsTemp == null){
-                                                Viscerae.LOGGER.error("Invalid default mob list reference $it in trial file: $id")
-                                                failed = true
-                                                break
-                                            } else {
-                                                mobs = mobsTemp
-                                            }
-                                        }
-                                    } else {
-                                        Viscerae.LOGGER.error("Invalid mob list $it (needs to be an array or a reference to a default mob list) in trial file: $id")
-                                    }
-                                } else {
-                                    val jsonArrayMobs = jsonMobs.asJsonArray
-                                    val result = deserializeMobList(jsonArrayMobs)
-                                    if (result.first != "") {
-                                        Viscerae.LOGGER.error("Problem deserializing mob list: [${result.first}] in trial file: $id")
-                                        failed = true
-                                        break
-                                    }
-                                    mobs = result.second
-                                }
-                                if (mobs.isEmpty()){
-                                    Viscerae.LOGGER.error("Mob list can't be empty; in trial file: $id")
-                                    failed  = true
-                                    break
-                                }
-                                waveData.put(waveTime,TrialData.WaveData(mobs, numberProvider,luckModifier,playerModifier,waveMessage))
+                                jsonTime.asInt
                             }
                         }
-                        if (failed){
-                            return
+                        val jsonTrial = it.get("wave_count")
+                        val numberProvider: LootNumberProvider = if (jsonTrial == null){
+                            ConstantLootNumberProvider.create(5f)
+                        } else {
+                            numberDeserializer.fromJson(jsonTrial, LootNumberProvider::class.java)
                         }
-                        trialMap[trialId] = TrialData(trialId,waveData)
+                        val jsonLuck = it.get("luck_modifier")
+                        val luckModifier = if (jsonLuck == null){
+                            0f
+                        } else {
+                            if (!jsonLuck.isJsonPrimitive){
+                                Viscerae.LOGGER.error("Invalid luck modifier $it in trial file: $id")
+                                failed = true
+                                break
+                            } else {
+                                jsonLuck.asFloat
+                            }
+                        }
+                        val jsonMultiplier = it.get("luck_modifier")
+                        val playerModifier = if (jsonMultiplier == null){
+                            0f
+                        } else {
+                            if (!jsonMultiplier.isJsonPrimitive){
+                                Viscerae.LOGGER.error("Invalid player modifier $it in trial file: $id")
+                                failed = true
+                                break
+                            } else {
+                                jsonMultiplier.asFloat
+                            }
+                        }
+                        val jsonText = it.get("wave_message")
+                        val waveMessage = if (jsonText == null){
+                            AcText.empty()
+                        } else {
+                            Text.Serializer.fromJson(jsonText)
+                        }
+                        if (waveMessage == null){
+                            Viscerae.LOGGER.error("Wave message $jsonText null for some reason, in trial file: $id")
+                            failed = true
+                            break
+                        }
+                        val jsonMobs = it.get("mobs")
+                        var mobs: ArrayList<Identifier> = ArrayList()
+                        if (!jsonMobs.isJsonArray){
+                            if (jsonMobs.isJsonPrimitive){
+                                val jsonMobKey =  jsonMobs.asString
+                                if (!mobLists.containsKey(jsonMobKey)){
+                                    Viscerae.LOGGER.error("Invalid default mob list reference $it in trial file: $id")
+                                } else {
+                                    val mobsTemp = mobLists[jsonMobKey]
+                                    if (mobsTemp == null){
+                                        Viscerae.LOGGER.error("Invalid default mob list reference $it in trial file: $id")
+                                        failed = true
+                                        break
+                                    } else {
+                                        mobs = mobsTemp
+                                    }
+                                }
+                            } else {
+                                Viscerae.LOGGER.error("Invalid mob list $it (needs to be an array or a reference to a default mob list) in trial file: $id")
+                            }
+                        } else {
+                            val jsonArrayMobs = jsonMobs.asJsonArray
+                            val result = deserializeMobList(jsonArrayMobs)
+                            if (result.first != "") {
+                                Viscerae.LOGGER.error("Problem deserializing mob list: [${result.first}] in trial file: $id")
+                                failed = true
+                                break
+                            }
+                            mobs = result.second
+                        }
+                        if (mobs.isEmpty()){
+                            Viscerae.LOGGER.error("Mob list can't be empty; in trial file: $id")
+                            failed  = true
+                            break
+                        }
+                        waveData.put(waveTime,TrialData.WaveData(mobs, numberProvider,luckModifier,playerModifier,waveMessage))
                     }
                 }
+                if (failed){
+                    return
+                }
+                val jsonId = json.get("id")
+                if (jsonId == null || !jsonId.isJsonPrimitive){
+                    Viscerae.LOGGER.error("Invalid or missing trial identifier $jsonId in trial file: $id")
+                    return
+                }
+                val trialId = Identifier.tryParse(jsonId.asString)
+                if (trialId == null){
+                    Viscerae.LOGGER.error("Couldn't parse identifier $jsonId in trial file: $id")
+                    return
+                }
+                val jsonKey = json.get("key_item")
+                if (jsonKey == null){
+                    Viscerae.LOGGER.error("Invalid or missing key item(s) $jsonId in trial file: $id")
+                    return
+                }
+                val key = Ingredient.fromJson(jsonKey)
+                trialMap[trialId] = TrialData(trialId,waveData)
+                keyRawMap[trialId] = key
+                for (stack in key.matchingStacks)
+               
             }
         } catch (e: Exception) {
             Viscerae.LOGGER.error("Failed to open or read trials file: $id")
