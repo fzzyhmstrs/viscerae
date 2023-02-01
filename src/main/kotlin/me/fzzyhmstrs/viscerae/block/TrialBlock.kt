@@ -44,6 +44,14 @@ class TrialBlock(settings: Settings): BlockWithEntity(settings){
         hand: Hand,
         hit: BlockHitResult
     ): ActionResult {
+        val entity = world.getBlockEntity(pos)
+        if (entity is TrialBlockEntity){
+            if (entity.activate(player,hand,world)){
+                return ActionResult.SUCCESS
+            } else {
+                return super.onUse(state, world, pos, player, hand, hit)
+            }
+        }
         return super.onUse(state, world, pos, player, hand, hit)
     }
      
