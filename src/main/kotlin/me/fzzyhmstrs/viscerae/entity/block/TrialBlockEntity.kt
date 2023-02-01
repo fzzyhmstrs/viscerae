@@ -128,51 +128,55 @@ class TrialBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEn
 
 
         fun tick(world: World, pos: BlockPos, state2: BlockState, blockEntity: TrialBlockEntity){
+            // process the delay between trials
             if (blockEntity.finishedTimer >= 0){
                 blockEntity.finishedTimer -= 1
+                return
             }
-            if (blockEntity.active){
-                val data = Trials.getTrialData(blockEntity.trial)
-                if (data != null){
-                    if (blockEntity.trialTimer % 20 == 0){
-                        val box = Box(blockEntity.pos.add(16.0, 6.0, 16.0), blockEntity.pos.add(-16.0, -6.0, -16.0))
-                        val plyrLst = world.getNonSpectatingEntities(PlayerEntity::class.java, box)
-                        var trialsWon = 0
-                        for (plyr in plyrLst){
-                            trialsWon += (plyr as TrialTracking).trialsWon()
-                        }
-                        blockEntity.activeTrialsWon = trialsWon
-                        blockEntity.activePlayers = plyrLst
-                    }
-                    val playerList= blockEntity.activePlayers.ifEmpty {
-                        val box = Box(blockEntity.pos.add(16.0, 6.0, 16.0), blockEntity.pos.add(-16.0, -6.0, -16.0))
-                        val plyrLst = world.getNonSpectatingEntities(PlayerEntity::class.java, box)
-                        var trialsWon = 0
-                        for (plyr in plyrLst){
-                            trialsWon += (plyr as TrialTracking).trialsWon()
-                        }
-                        blockEntity.activeTrialsWon = trialsWon
-                        blockEntity.activePlayers = plyrLst
-                        plyrLst
-                    }
-                    if (playerList.isEmpty()){
-                        blockEntity.active = false
-                        blockEntity.finishedTimer = FINISHED
-                    }
-                    val wave = data.provideNextWave(blockEntity.trialTimer,world,playerList)
-                    if (wave.isNotEmpty()){
-                        blockEntity.activeEntities = summonWave(world,pos,wave)
-                    }
-                    var waveDefeated = updateBossBar(blockEntity.activePlayers,blockEntity.activeEntities,blockEntity.bar)
-
-                    blockEntity.trialTimer += 1
-                    if (blockEntity.trialTimer >= data.maxWaveTime()){
-                        blockEntity.active = false
-                        blockEntity.finishedTimer = FINISHED
-                        blockEntity.trialTimer = 0
-                    }
+            //return if a trial isn't active
+            if (! blockEntity.active) return
+            //get the trial data
+            val data = Trials.getTrialData(blockEntity.trial)
+            //if it's null, something is wrong. Abort the trial, send a log error, return
+            if (data == null){
+                Viscerae.LOGGER.error("couldn't find trial ${blockEntity.trial}, aborting!")
+                blockEntity.active = false
+                return
+            }
+            //refresh block entities player list once a second
+            if (blockEntity.trialTimer % 20 == 0){
+                val box = Box(blockEntity.pos.add(16.0, 6.0, 16.0), blockEntity.pos.add(-16.0, -6.0, -16.0))
+                val plyrLst = world.getNonSpectatingEntities(PlayerEntity::class.java, box)
+                var trialsWon = 0
+                for (plyr in plyrLst){
+                    trialsWon += (plyr as TrialTracking).trialsWon()
                 }
+                blockEntity.activeTrialsWon = trialsWon
+                blockEntity.activePlayers = plyrLst
             }
+            //fail the trial if there are no players in range. may want to let the trial set the range so the big temple or small trials can mess with that?
+            if (blockEntity.activePlayers.isEmpty()){
+                blockEntity.active = false
+                blockEntity.finishedTimer = FINISHED
+                return
+            }
+            //request wave data for this tick
+            val wave = data.provideNextWave(blockEntity.trialTimer,world,blockEntity.activePlayers)
+            //if there is actually was wave data, set up the new list of entities and summon them in
+            //may want to have another trial setting that lets you pick to wait for the wave to be defeated or just tacks on entities to the list, resets the bar to full and trucks on
+            if (wave.isNotEmpty()){
+                blockEntity.activeEntities = summonWave(world,pos,wave)
+            }
+            var waveDefeated = updateBossBar(blockEntity.activePlayers,blockEntity.activeEntities,blockEntity.bar)
+
+            blockEntity.trialTimer += 1
+            if (blockEntity.trialTimer >= data.maxWaveTime()){
+                blockEntity.active = false
+                blockEntity.finishedTimer = FINISHED
+                blockEntity.trialTimer = 0
+            }
+
+
         }
 
         fun summonWave(world: World,pos: BlockPos,waveData: List<Identifier>): List<LivingEntity>{
