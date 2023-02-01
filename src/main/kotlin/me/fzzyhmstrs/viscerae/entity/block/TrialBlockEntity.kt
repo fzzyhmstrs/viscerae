@@ -152,10 +152,11 @@ class TrialBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEn
             if (wave.isNotEmpty()){
                 blockEntity.activeEntities = summonWave(world,pos,wave)
             }
+            //update the boss bar and determine if the wave is defeated. Used to finally check for a won trial
             var waveDefeated = updateBossBar(blockEntity.activePlayers,blockEntity.activeEntities,blockEntity.bar)
 
             blockEntity.trialTimer += 1
-            if (blockEntity.trialTimer >= data.maxWaveTime()){
+            if (blockEntity.trialTimer >= data.maxWaveTime() && waveDefeated){
                 blockEntity.active = false
                 blockEntity.finishedTimer = FINISHED
                 blockEntity.trialTimer = 0
