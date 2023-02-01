@@ -34,48 +34,32 @@ class TrialBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEn
     private var bar: ServerBossBar? = null
 
 
-    fun activate(player: PlayerEntity,hand: Hand,world: World){
+    fun activate(player: PlayerEntity, hand: Hand, world: World): Boolean{
         val stack = player.getStackInHand(hand)
         if (offeredStack != ItemStack.EMPTY || active || finishedTimer > 0){
-            return
+            return false
         }
-        if (!(stack.isIn(RegisterTag.BASIC_TRIAL_KEYS) || stack.isIn(RegisterTag.ADVANCED_TRIAL_KEYS))) {
-            return
-        } else {
-            offeredStack = stack.copy()
-            player.setStackInHand(hand, ItemStack.EMPTY)
-        }
+        val possibleTrials = Trials.checkKeyItem(stack.item)
+        if (possibleTrials.isEmpty()) return false
+        
+        offeredStack = stack.copy()
+        player.setStackInHand(hand, ItemStack.EMPTY)
+        
+        trial = possibleTrials[world.random.nextInt(possibleTrials.size)]
+        
         if (world.registryKey == World.NETHER){
-            if (stack.isIn(RegisterTag.ADVANCED_TRIAL_KEYS)){
-                val testId = Identifier(trial.namespace,"nether_advanced_${trial.path}")
-                if (Trials.getTrialData(testId) != null){
-                    trial = testId
-                } else {
-                    val testId2 = Identifier(trial.namespace,"advanced_${trial.path}")
-                    if (Trials.getTrialData(testId2) != null){
-                        trial = testId
-                    } else {
-                        val testId3 = Identifier(trial.namespace,"nether_${trial.path}")
-                        if (Trials.getTrialData(testId3) != null){
-                            trial = testId
-                        }
-                    }
-                }
-            }
-
-        } else {
-            if (stack.isIn(RegisterTag.ADVANCED_TRIAL_KEYS)){
-                val testId = Identifier(trial.namespace,"advanced_${trial.path}")
-                if (Trials.getTrialData(testId) != null){
-                    trial = testId
-                }
+            val testId = Identifier(trial.namespace,"nether_${trial.path}")
+            if (Trials.getTrialData(testId) != null){
+                trial = testId
             }
         }
-        val box = Box(pos.add(16.0,6.0,16.0),pos.add(-16.0,-6.0,-16.0))
+        val trialToActivate = Trials.getTrialData(trial)?:Trials.getTrialData(FALLBACK)?:return false
+        val w = trialToActivate.getWidth()
+        val h = trialToActivate.getHeight()
+        val box = Box(pos.add(w,h,w),pos.add(-w,-h,-w))
         val players = world.getNonSpectatingEntities(PlayerEntity::class.java,box)
         var trialsWon = 0
-        val trialToBar = Trials.getTrialData(trial)?:Trials.getTrialData(FALLBACK)?:return
-        bar = ServerBossBar(trialToBar.trialTitle,BossBar.Color.RED,BossBar.Style.NOTCHED_10)
+        bar = ServerBossBar(trialToActivate.trialTitle,BossBar.Color.RED,BossBar.Style.NOTCHED_10)
         for (plyr in players){
             if (plyr is ServerPlayerEntity) {
                 bar?.addPlayer(plyr)
@@ -84,6 +68,7 @@ class TrialBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEn
         }
         activeTrialsWon = trialsWon
         active = true
+        return true
     }
 
     override fun writeNbt(nbt: NbtCompound) {
