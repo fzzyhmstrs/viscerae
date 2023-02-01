@@ -38,9 +38,11 @@ object Trials: SimpleSynchronousResourceReloadListener {
         return trialMap[trial]
     }
 
-    class TrialData(private val waveData: ArrayListMultimap<Int, WaveData> = ArrayListMultimap.create(),
-                    private val trialTitle: MutableText = AcText.translatable("viscerae.trial.fallback"),
+    class TrialData(id: Identifier,
+                    private val waveData: ArrayListMultimap<Int, WaveData> = ArrayListMultimap.create(),
                     private val lootTable: Identifier = Identifier(Viscerae.MOD_ID,FALLBACK_LOOT)){
+
+        val trialTitle = AcText.translatable("trial.${id.namespace}.${id.path}")
 
         fun numberOfWaves(): Int{
             return waveData.size()
@@ -260,7 +262,7 @@ object Trials: SimpleSynchronousResourceReloadListener {
                         if (failed){
                             return
                         }
-                        trialMap[trialId] = TrialData(waveData)
+                        trialMap[trialId] = TrialData(trialId,waveData)
                     }
                 }
             }
