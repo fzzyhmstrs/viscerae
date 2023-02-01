@@ -58,6 +58,8 @@ object Trials: SimpleSynchronousResourceReloadListener {
 
     class TrialData(id: Identifier,
                     private val waveData: ArrayListMultimap<Int, WaveData> = ArrayListMultimap.create(),
+                    private val width: Double = 16.0,
+                    private val height: Double = 6.0,
                     private val lootTable: Identifier = Identifier(Viscerae.MOD_ID,FALLBACK_LOOT)){
 
         val trialTitle = AcText.translatable("trial.${id.namespace}.${id.path}")
@@ -74,6 +76,14 @@ object Trials: SimpleSynchronousResourceReloadListener {
                 }
             }
             return maxTime
+        }
+        
+        fun getWidth(): Double{
+            return width
+        }
+        
+        fun getHeight(): Double{
+            return height
         }
 
         fun provideNextWave(tick: Int, world: World, playerEntities: List<PlayerEntity>, waveMultiplier: Float = 1f): List<Identifier>{
@@ -289,13 +299,38 @@ object Trials: SimpleSynchronousResourceReloadListener {
                     return
                 }
                 val key = Ingredient.fromJson(jsonKey)
-                trialMap[trialId] = TrialData(trialId,waveData)
+                val jsonSize = json.get("trial_area")
+                val size = if (jsonSize != null && jsonSize.isJsonObject){
+                    jsonSizeWidth = (jsonSize as JsonObject).get("width")
+                    val width = if (jsonSizeWidth != null && jsonSizeWidth.isJsonPrimitive){
+                        jsonSizeWidth.asDouble
+                    } else {
+                        16.0
+                    }
+                    jsonSizeHeight = (jsonSize as JsonObject).get("height")
+                    val height = if (jsonSizeHeight != null && jsonSizeHeight.isJsonPrimitive){
+                        jsonSizeHeight.asDouble
+                    } else {
+                        6.0
+                    }
+                    Pair(width,height)
+                } else {
+                    Pair(16.0,6.0)
+                }
+                val jsonLootId = json.get("loot_id")
+                if (jsonLootId != null){
+                    val lootId = Identifier.tryParse(jsonLootId.asString)
+                    if (lootId != null){
+                        trialMap[trialId] = TrialData(trialId,waveData,size.left, size.right, lootId)
+                    } else {
+                        trialMap[trialId] = TrialData(trialId,waveData,size.left, size.right)
+                    }
+                }
                 keyRawMap[trialId] = key
-                for (stack in key.matchingStacks)
-               
             }
         } catch (e: Exception) {
             Viscerae.LOGGER.error("Failed to open or read trials file: $id")
+            e.printStackTrace()
         }
     }
 
