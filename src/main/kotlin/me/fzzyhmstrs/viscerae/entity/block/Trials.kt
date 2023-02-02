@@ -40,11 +40,19 @@ object Trials: SimpleSynchronousResourceReloadListener {
         return trialMap[trial]
     }
     
-    fun checkKeyItem(item: Item): List<Identifier>{
+    fun checkKeyItem(item: Item, dim: Identifier): List<Identifier>{
         if (keyMap.isEmpty()){
             processKeyMap()
         }
-        return keyMap.get(item)
+        val list = keyMap.get(item)
+        val list2: ArrayList<Identifier> = ArrayList()
+        for (id in list){
+            val trial = getTrialData(id)?:continue
+            if (trial.checkDimension(dim)){
+                list2.add(id)
+            }
+        }
+        return list2
     }
     
     private fun processKeyMap(){
@@ -59,11 +67,27 @@ object Trials: SimpleSynchronousResourceReloadListener {
     class TrialData(id: Identifier,
                     private val waveData: ArrayListMultimap<Int, WaveData> = ArrayListMultimap.create(),
                     private val width: Double = 16.0,
-                    private val height: Double = 6.0,
-                    private val lootTable: Identifier = Identifier(Viscerae.MOD_ID,FALLBACK_LOOT)){
+                    private val height: Double = 6.0){
 
         val trialTitle = AcText.translatable("trial.${id.namespace}.${id.path}")
+        private var lootTable: Identifier = Identifier(Viscerae.MOD_ID,FALLBACK_LOOT)
+        private val dimensions: MutableList<Identifier> = mutableListOf()
 
+        fun withLootId(lootId: Identifier): TrialData{
+            this.lootTable = lootId
+            return this
+        }
+        
+        fun withDimension(dim: Identifier): TrialData{
+            this.dimensions.add(dim)
+            return this
+        }
+        
+        fun checkDimension(dim: Identifier): Boolean{
+            if (dimensions.isEmpty() return true
+            return dimensions.contains(dim)
+        }
+        
         fun numberOfWaves(): Int{
             return waveData.size()
         }
@@ -317,15 +341,33 @@ object Trials: SimpleSynchronousResourceReloadListener {
                 } else {
                     Pair(16.0,6.0)
                 }
+                var trialData = TrialData(trialId,waveData,size.left, size.right)
                 val jsonLootId = json.get("loot_id")
                 if (jsonLootId != null){
                     val lootId = Identifier.tryParse(jsonLootId.asString)
                     if (lootId != null){
-                        trialMap[trialId] = TrialData(trialId,waveData,size.left, size.right, lootId)
-                    } else {
-                        trialMap[trialId] = TrialData(trialId,waveData,size.left, size.right)
+                        trialData = trialData.withLootId(lootId)
                     }
                 }
+                val jsonDims = json.get("dimensions")
+                if (jsonDims != null){
+                    if (jsonDims.isJsonPrimitive){
+                        val dimId = Identifier.tryParse(jsonDims.asString)
+                        if (dimId != null){
+                            trialData = trialData.withDimension(dimId)
+                        }
+                    } else if (jsonDims.isJsonArray){
+                        for (chk in jsonDims.asJsonArray){
+                            if (chk.isJsonPrimitive){
+                                val dimId = Identifier.tryParse(chk.asString)
+                                if (dimId != null){
+                                    trialData = trialData.withDimension(dimId)
+                                }
+                            }
+                        }
+                    }
+                }
+                trialMap[trialId] = trialData
                 keyRawMap[trialId] = key
             }
         } catch (e: Exception) {
