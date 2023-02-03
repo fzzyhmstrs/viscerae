@@ -10,24 +10,30 @@ import net.minecraft.world.World
 
 class OfferingBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(RegisterEntity.BLOODSTAINED_ALTAR_ENTITY,pos,state) {
 
-    private var stack: ItemStack = ItemStack.EMPTY
+    
+    private val inv: Inventory = SimpleInventory(1)
 
     fun setHeldStack(stack: ItemStack){
-        this.stack = stack
+        inv.setStack(0,stack)
     }
 
     fun getHeldStack(): ItemStack{
-        return stack
+        return inv.getStack(0)
+    }
+    
+    fun getInventory(): Inventory{
+        return inv
     }
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)
-        val stack = ItemStack.fromNbt(nbt.getCompound("stack"))
+        inv.setStack(0,ItemStack.fromNbt(nbt.getCompound("stack")))
     }
 
     override fun writeNbt(nbt: NbtCompound) {
         super.writeNbt(nbt)
         val compound = NbtCompound()
+        val stack = inv.getStack(0)
         stack.writeNbt(compound)
         nbt.put("stack", compound)
     }
