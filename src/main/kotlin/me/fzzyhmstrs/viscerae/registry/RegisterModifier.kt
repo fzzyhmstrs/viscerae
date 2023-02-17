@@ -1,9 +1,9 @@
 package me.fzzyhmstrs.viscerae.registry
 
-import me.fzzyhmstrs.amethyst_core.modifier_util.AbstractModifier
+import me.fzzyhmstrs.fzzy_core.modifier_util.AbstractModifier
 import me.fzzyhmstrs.amethyst_core.modifier_util.AugmentModifier
-import me.fzzyhmstrs.amethyst_core.modifier_util.EquipmentModifier
-import me.fzzyhmstrs.amethyst_core.registry.ModifierRegistry
+import me.fzzyhmstrs.gear_core.modifier_util.EquipmentModifier
+import me.fzzyhmstrs.fzzy_core.registry.ModifierRegistry
 import me.fzzyhmstrs.viscerae.Viscerae
 import me.fzzyhmstrs.viscerae.modifier.ModifierConsumers
 import me.fzzyhmstrs.viscerae.modifier.ModifierPredicates
@@ -14,6 +14,16 @@ import net.minecraft.util.Identifier
 object RegisterModifier {
 
     private val regMod: MutableList<AbstractModifier<*>> = mutableListOf()
+
+    //trinket modifiers
+    val WHISPER_OF_REGRET_SCEPTER = AugmentModifier(Identifier(Viscerae.MOD_ID,"whisper_of_regret_scepter"),1)
+        .withDamage(0.0f,0.0f,25f)
+        .withAmplifier(2)
+        .also { regMod.add(it) }
+    val WHISPER_OF_REGRET = EquipmentModifier(Identifier(Viscerae.MOD_ID,"whisper_of_regret"), persistent = true, randomSelectable = false)
+        .withModifiers(WHISPER_OF_REGRET_SCEPTER.modifierId)
+        .also { regMod.add(it) }
+
 
     //weapon modifiers
     val BLOOD_SLASH = EquipmentModifier(Identifier(Viscerae.MOD_ID,"blood_slash"), persistent = true, randomSelectable = false)

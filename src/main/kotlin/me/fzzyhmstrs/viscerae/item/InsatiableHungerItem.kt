@@ -29,7 +29,7 @@ class InsatiableHungerItem(material: ToolMaterial, attackDamage: Int, attackSpee
         val nbt = stack.orCreateNbt
     }
 
-    override fun getAttributeModifiers(slot: EquipmentSlot?): Multimap<EntityAttribute, EntityAttributeModifier> {
+    override fun getAttributeModifiers(slot: EquipmentSlot): Multimap<EntityAttribute, EntityAttributeModifier> {
         val attributeModifiers = HashMultimap.create(super.getAttributeModifiers(slot))
 
         return attributeModifiers

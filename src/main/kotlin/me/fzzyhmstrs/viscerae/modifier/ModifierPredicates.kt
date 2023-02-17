@@ -1,11 +1,7 @@
 package me.fzzyhmstrs.viscerae.modifier
 
 import me.fzzyhmstrs.amethyst_core.AC
-import me.fzzyhmstrs.amethyst_core.scepter_util.SpellType
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.AugmentHelper
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.ScepterAugment
-import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SoulAugment
-import me.fzzyhmstrs.viscerae.Viscerae
+import me.fzzyhmstrs.amethyst_core.scepter_util.augments.SummonEntityAugment
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
@@ -34,5 +30,7 @@ object ModifierPredicates {
         opt.ifPresent { entry -> bl = entry.isIn(EMPOWERED_AUGMENTS) }
         return bl
     }
+
+    val SUMMONERS_PREDICATE = Predicate {id: Identifier -> Registry.ENCHANTMENT.get(id) is SummonEntityAugment }
 
 }

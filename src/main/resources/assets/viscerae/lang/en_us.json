@@ -110,6 +110,8 @@
 	"item.viscerae.pendant_of_memories.flavor": "It remembers all of your victims... does it want to? DOes it have a choice?",
 	"item.viscerae.ring_of_souls": "Ring of Souls",
 	"item.viscerae.ring_of_souls.flavor": "Souls of those you've slaughtered find themselves trapped inside",
+	"item.viscerae.ring_of_souls.tier": "Tier: %1$s (%2$s/%3$s kills)",
+	"item.viscerae.ring_of_souls.tier_max": "Tier: %1$s (max)",
 	"item.viscerae.rune_of_eternity": "Rune of Eternity",
 	"item.viscerae.rune_of_eternity.flavor": "The unholy symbols of the lich lash at your mind",
 	"item.viscerae.rune_of_power": "Rune of Power",

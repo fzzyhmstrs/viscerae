@@ -1,14 +1,15 @@
 package me.fzzyhmstrs.viscerae.item
 
 import me.fzzyhmstrs.amethyst_core.item_util.AbstractAugmentJewelryItem
-import me.fzzyhmstrs.amethyst_core.mana_util.ManaItem
-import me.fzzyhmstrs.amethyst_core.trinket_util.TrinketUtil
+import me.fzzyhmstrs.fzzy_core.mana_util.ManaItem
+import me.fzzyhmstrs.fzzy_core.trinket_util.TrinketUtil
+import me.fzzyhmstrs.gear_core.interfaces.KillTracking
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
 
-class PendantOfMemoriesItem(settings: Settings): AbstractAugmentJewelryItem(settings), ManaItem {
+class PendantOfMemoriesItem(settings: Settings): AbstractAugmentJewelryItem(settings), ManaItem, KillTracking {
 
     override fun intermittentTick(stack: ItemStack, entity: LivingEntity) {
         if (entity.world.random.nextFloat() < 0.1 && stack.isDamaged){

@@ -1,13 +1,12 @@
 package me.fzzyhmstrs.viscerae.item
 
-import me.fzzyhmstrs.amethyst_core.coding_util.PlayerParticlesV2.scepterParticlePos
 import me.fzzyhmstrs.amethyst_core.scepter_util.ScepterToolMaterial
+import me.fzzyhmstrs.fzzy_core.coding_util.PlayerParticlesV2.scepterParticlePos
 import me.fzzyhmstrs.viscerae.registry.RegisterParticle
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.LivingEntity
-import net.minecraft.item.Item
 import net.minecraft.world.World
 
 class BloodWitchScepterItem(material: ScepterToolMaterial, settings: Settings): CustomScepterItem(material, settings) {
